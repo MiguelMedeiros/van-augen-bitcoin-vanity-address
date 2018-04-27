@@ -1,0 +1,63 @@
+// form
+.vanity-form{
+	margin: auto;
+	margin-top: 2rem;
+	input[type="text"]{
+		display: block;
+		margin: auto;
+		width: 250px;
+		padding: 10px;
+		border-radius: 5px;
+		border: 1px solid #ccc;
+		text-align: center;
+		font-size: 1.4rem;
+		outline: 0;
+	}
+}
+.button{
+	display: block;
+	margin: 1rem auto;
+	//background: #000;
+	width: 200px;
+	padding: 10px;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	color: #000;
+	&:hover, &:focus{
+		background: green;
+		text-decoration: none;
+		color: #fff;
+	}
+}
+
+.create-address{
+	
+}
+
+.cancel-address{
+	display: none;
+	&:hover, &:focus{
+		background: red;
+	}
+}
+
+//results
+.result{
+	margin: 1rem;
+}
+.result-address{
+	display: none;
+	margin: auto;
+	text-align: left;
+	width: 100%;
+	max-width: 650px;
+	word-wrap: break-word;
+}
+
+//messages
+.message{
+	display: none;
+}
+.error{
+	border: 1px solid red !important;
+}

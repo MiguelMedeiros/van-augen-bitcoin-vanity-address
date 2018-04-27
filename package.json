@@ -1,0 +1,33 @@
+{
+  "name": "vanity",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "beeper": "^1.1.1",
+    "bitcoinjs-lib": "^3.3.2",
+    "body-parser": "~1.18.2",
+    "bootstrap": "^4.1.0",
+    "clipboard": "^2.0.0",
+    "cookie-parser": "~1.4.3",
+    "cryptojs": "^2.5.3",
+    "debug": "~2.6.9",
+    "eccrypto": "^1.0.3",
+    "ejs": "~2.5.7",
+    "express": "~4.15.5",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-livereload": "^3.8.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^4.0.1",
+    "gulp-uglify": "^3.0.0",
+    "jquery": "^3.3.1",
+    "morgan": "~1.9.0",
+    "node-cron": "^1.2.1",
+    "nodemon": "^1.17.3",
+    "popper.js": "^1.14.3",
+    "serve-favicon": "~2.4.5"
+  }
+}

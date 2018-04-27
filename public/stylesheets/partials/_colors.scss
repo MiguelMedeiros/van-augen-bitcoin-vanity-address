@@ -1,0 +1,38 @@
+
+$red: #eb4d5c;
+$green: #5cb888;
+
+//backgrounds
+.bg-red{
+	background-color: $red;
+}
+.bg-green{
+	background-color: $green;
+}
+.bg-yellow{
+	background-color: yellow;
+	color: #000;
+	.green{
+		color: #000 !important;
+	}
+}
+
+//colors
+.red{
+	color: $red;
+}
+.green{
+	color: $green;
+}
+.gray{
+	color: gray;
+}
+.yellow{
+	color: yellow;
+}
+.pink{
+	color: pink;
+}
+.orange{
+	color: orange;
+}

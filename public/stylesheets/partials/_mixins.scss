@@ -1,0 +1,24 @@
+
+@keyframes blink {
+    96% {
+		height: 12px;
+		width: 12px;
+		border-radius: 10px;
+    }
+    100% {
+    	height: 2px;
+		width: 14px;
+		border-radius: 0;
+    }
+}
+@keyframes olhar {
+    0% {
+		left: 48%;
+    }
+    50%{
+    	left: 55%;
+    }
+    100% {
+		left: 40%;
+    }
+}
