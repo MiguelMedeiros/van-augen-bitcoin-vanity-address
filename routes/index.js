@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
-const spawn = require('threads').spawn;
+var spawn = require('threads').spawn;
 var vanity = require('./../components/vanity');
+
 // helper variables to keep current search state
 var thread = null
 var oldResponse = null
@@ -12,27 +13,22 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/generateWallet', function(req, res, next) {
-        try {
-		// save response to be used on /cancelWallet
-		oldResponse = res
+	// save response to be used on /cancelWallet
+	oldResponse = res
 
-		// kill any old thread
-		if(thread) {
-			thread.kill()
-		}
-		// spawn a new search
-		thread = spawn(function(input, done) {
-			var vanity = require('./../../../../components/vanity');
-			var result = vanity.generateVanityWallet(input);
-			done(result);
-		});
-		thread.send(req.body.textVanity)
-			.on('message', function(response) {
-				res.send(response)
-			});
-	} catch (err) {
-		console.log(err)
+	// kill any old thread
+	if(thread) {
+		thread.kill()
 	}
+	// spawn a new search
+	thread = spawn(function(input, done) {
+		var result = vanity.generateVanityWallet(input);
+		done(result);
+	});
+
+	thread.send(req.body.textVanity).on('message', function(response) {
+		res.send(response)
+	});
 });
 
 router.get('/cancelWallet', function(req, res, next) {
