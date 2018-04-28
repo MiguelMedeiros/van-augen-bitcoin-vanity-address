@@ -8,26 +8,24 @@ $( document ).ready(function() {
 	  	placement: 'right'
 	});
 
-	function hideTooltip() {
-		setTimeout(function() {
-	    	$('.clipboard').tooltip('hide');
-	  	}, 700);
-	}
-
 	var clipboard = new ClipboardJS('button');
-
 	clipboard.on('success', function(e) {
 		hideTooltip();
 	});
 
-
 });
+
+function hideTooltip() {
+	setTimeout(function() {
+    	$('.clipboard').tooltip('hide');
+  	}, 700);
+}
 
 function validateTextVanity(textVanity){
 	if(textVanity == ""){
 		$("#text-vanity").addClass('error');
+		$("#alert-message").text("No text, no vanity address!");
 		$("#alert-message").show();
-		$("#alert-message").text("erro");
 		return false;
 	}else{
 		$("#text-vanity").removeClass('error');
@@ -40,30 +38,45 @@ function createWallet(){
 	var textVanity = $("#text-vanity").val();
 	$(".result-address").hide();
 
-	//validate input text
+	$("body").removeClass("stop-animation");
+
+	// validate input text
 	if(validateTextVanity(textVanity)){
 		
-		//change buttons
-		$('.create-address').hide();
+		// change buttons
+		$('#text-vanity').prop('disabled', true);
 		$('.cancel-address').css("display", "block");
 		$('.cancel-address').show();
-		$('#text-vanity').prop('disabled', true);
+		$('.create-address').hide();
 
-		//ajax call
+		// ajax call
 		$.post("/generateWallet", {
 			textVanity: textVanity
 		}).done(function(data){
-			//result
-			$(".public-key span").text(data[0]);
-			$(".public-key .clipboard").attr("data-clipboard-text", data[0]);
-			$(".private-key span").text(data[1]);
-			$(".private-key .clipboard").attr("data-clipboard-text", data[1]);
-			$(".attempts span").text(data[2]);
-			$(".result-address").fadeIn();
 
-			$('#text-vanity').prop('disabled', false);
-			$('.create-address').show();
-			$('.cancel-address').hide();
+			if(data){
+				// number of attempts
+				$(".attempts span").text(data[2]);
+
+				// public key
+				$(".public-key span").text(data[0]);
+				$(".public-key .clipboard").attr("data-clipboard-text", data[0]);
+
+				// private key (wif)
+				$(".private-key span").text(data[1]);
+				$(".private-key .clipboard").attr("data-clipboard-text", data[1]);
+				
+				// show result
+				$(".result-address").fadeIn();
+
+				// change buttons
+				$('#text-vanity').prop('disabled', false);
+				$('.create-address').show();
+				$('.cancel-address').hide();
+
+				// stop animation on background
+				$("body").addClass("stop-animation");
+			}
 		});
 	}
 }
@@ -71,7 +84,14 @@ function createWallet(){
 
 function cancelWallet(){
 	$.get("/cancelWallet", function(data){
-		console.log(data);
+		
+		// change buttons
+		$('#text-vanity').prop('disabled', false);
+		$('.create-address').show();
+		$('.cancel-address').hide();
+		
+		// stop animation on background
+		$("body").addClass("stop-animation");
 	});
 }
 
