@@ -47,25 +47,42 @@ var getBitcoinWallet = function (){
 }
 
 var generateWIF = function (privateKey){
+	var version = '80'
 
+	// passo 1 - adicionar versao no comeco da chave privada: https://en.bitcoin.it/wiki/List_of_address_prefixes
+	var versionAndPrivateKey = version + privateKey
+
+	// passo 2 - hash sha256 do passo anterior
+	var firstSHA = CryptoJS.SHA256(CryptoJS.util.hexToBytes(versionAndPrivateKey))
+
+	// passo 3 - hash sha256 do passo anterior (de novo)
+	var secondSHA = CryptoJS.SHA256(CryptoJS.util.hexToBytes(firstSHA))
+
+	// passo 4 - retirar os 4 primeiros bytes do passo 4 e salvar como checksum
+	var checksum = secondSHA.substr(0, 8).toUpperCase()
+
+	// passo 5 - juntar '80' com a chave privada e adicionar o checksum ao final
+	var versionAndPrivateKeyAndChecksum = versionAndPrivateKey + checksum
+
+	// passo 6 - codificar para base58
+	var wif =  bs58.encode(CryptoJS.util.hexToBytes(versionAndPrivateKeyAndChecksum));
+
+	return wif
 }
-
 
 var generateVanityWallet = function(textVanity){
 
 	i = 0;
 
-	while(1){
+	while(1) {
 		result = getBitcoinWallet();
 		i++
-		process.stdout.write('\x1Bc'); 
-		console.log("Created "+i+ " number of addresses to find your vanity address!");
 		walletAddress = result[0].substr(1,textVanity.length);
 		if(walletAddress.toUpperCase() == textVanity.toUpperCase()){
+			result[1] = generateWIF(result[1])
 			result[2] = i;
+			console.log("Number of created addresses to find your vanity address: "+i);
 			return (result);
-			//generateWIF(resultado[1]);
-			break;
 		}
 	}
 

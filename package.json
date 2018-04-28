@@ -28,6 +28,7 @@
     "node-cron": "^1.2.1",
     "nodemon": "^1.17.3",
     "popper.js": "^1.14.3",
-    "serve-favicon": "~2.4.5"
+    "serve-favicon": "~2.4.5",
+    "threads": "^0.10.1"
   }
 }
