@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var spawn = require('threads').spawn;
-var vanity = require('./../components/vanity');
+const spawn = require('threads').spawn;
 
 // helper variables to keep current search state
 var thread = null
@@ -22,6 +21,7 @@ router.post('/generateWallet', function(req, res, next) {
 	}
 	// spawn a new search
 	thread = spawn(function(input, done) {
+		var vanity = require('./../../../../components/vanity');
 		var result = vanity.generateVanityWallet(input);
 		done(result);
 	});
