@@ -5,7 +5,7 @@
 	input[type="text"]{
 		display: block;
 		margin: auto;
-		width: 250px;
+		width: 200px;
 		padding: 10px;
 		border-radius: 5px;
 		border: 1px solid #ccc;
@@ -17,21 +17,22 @@
 .button{
 	display: block;
 	margin: 1rem auto;
-	//background: #000;
+	background: #fff;
 	width: 200px;
 	padding: 10px;
 	border-radius: 5px;
 	border: 1px solid #ccc;
 	color: #000;
 	&:hover, &:focus{
-		background: green;
 		text-decoration: none;
 		color: #fff;
 	}
 }
 
 .create-address{
-	
+	&:hover, &:focus{
+		background: green;
+	}
 }
 
 .cancel-address{
