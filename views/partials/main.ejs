@@ -19,6 +19,12 @@
 							<option value="end">End</option>
 						</select>
 					</div>
+					<div class="wallet-type">
+						<select id="wallet-type">
+							<option value="start">Legacy</option>
+							<option value="end">Segwit</option>
+						</select>
+					</div>
 				</div>
 				<div id="alert-message"></div>
 				<input class="button create-address" type="submit" value="Generate Vanity Wallet" />
@@ -29,14 +35,14 @@
 			<div class="result attempts"><b>Number of attempts:</b> <span></span></div>
 			<div class="result public-key">
 				<b>Bitcoin Address:</b><br/>
-				<span></span><br/>
 				<div id="qrcode-btc-public-key"></div>
+				<span></span><br/>
 				<button class="btn clipboard" data-clipboard-text="" >Copy <i class="fas fa-paste"></i></button>
 			</div>
 			<div class="result private-key">
 				<b>Private Key (WIF):</b><br/>
-				<span></span><br/>
 				<div id="qrcode-btc-private-key"></div>
+				<span></span><br/>
 				<button class="btn clipboard" data-clipboard-text="" >Copy <i class="fas fa-paste"></i></button>
 			</div>
 		</div>

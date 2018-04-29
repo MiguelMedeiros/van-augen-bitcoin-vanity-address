@@ -81,6 +81,7 @@ function createWallet(){
 	var coresAllowed = $("#core-slider").val();
 	var caseSensitive = $("#case-sensitive").is(':checked');
 	var stringEnd = $("#string-end").val();
+	var walletType = $("#walletType").val();
 
 	$(".result-address").hide();
 
@@ -100,7 +101,8 @@ function createWallet(){
 			textVanity: textVanity,
 			coresAllowed: coresAllowed,
 			caseSensitive: caseSensitive,
-			stringEnd: stringEnd
+			stringEnd: stringEnd,
+			walletType: walletType
 		}).done(function(data){
 
 			if(data){
