@@ -70,7 +70,7 @@ var generateWIF = function (privateKey){
 	return wif
 }
 
-var generateVanityWallet = function(textVanity){
+var generateVanityWallet = function(textVanity, progress){
 
 	i = 0;
 
