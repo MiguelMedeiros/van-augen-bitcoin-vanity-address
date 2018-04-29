@@ -25,6 +25,9 @@ $( document ).ready(function() {
 		}
 	});
 
+	// mask
+	$('#text-vanity').mask('AAAAAAA');
+
 	// vanity form submit
 	$( "#vanity-form" ).submit(function( event ) {
 		createWallet();
@@ -57,7 +60,7 @@ function createWallet(){
 	var coresAllowed = $("#core-slider").val();
 	var caseSensitive = $("#case-sensitive").is(':checked');
 	var stringEnd = $("#string-end").val();
-	var walletType = $("#walletType").val();
+	var walletType = $("#wallet-type").val();
 
 	$(".result-address").hide();
 
@@ -88,13 +91,29 @@ function createWallet(){
 				// public key
 				$(".public-key span").text(data[0]);
 				$(".public-key .clipboard").attr("data-clipboard-text", data[0]);
-				createQRcode("qrcode-btc-public-key", data[0]);
+				$("#qrcode-btc-public-key").html("");
+				var qrcodePublic = new QRCode("qrcode-btc-public-key" , {
+					text: data[0],
+					width: 128,
+					height: 128,
+					colorDark : "#000000",
+					colorLight : "transparent",
+					correctLevel : QRCode.CorrectLevel.H
+				});
 
 				// private key (wif)
 				$(".private-key span").text(data[1]);
-				$(".private-key .clipboard").attr("data-clipboard-text", data[1]);
-				createQRcode("qrcode-btc-private-key", data[1]);
-				
+				$(".private-key .clipboard").attr("data-clipboard-text", data[1]);	
+				$("#qrcode-btc-private-key").html("");						
+				var qrcodeSecret = new QRCode("qrcode-btc-private-key" , {
+					text: data[1],
+					width: 128,
+					height: 128,
+					colorDark : "#000000",
+					colorLight : "transparent",
+					correctLevel : QRCode.CorrectLevel.H
+				});
+
 				// show result
 				$(".result-address").fadeIn();
 
@@ -108,17 +127,6 @@ function createWallet(){
 			}
 		});
 	}
-}
-
-function createQRcode(elementID, text){
-	var qrcode = new QRCode(elementID, {
-		text: text,
-		width: 128,
-		height: 128,
-		colorDark : "#000000",
-		colorLight : "transparent",
-		correctLevel : QRCode.CorrectLevel.H
-	});
 }
 
 function cancelWallet(){
