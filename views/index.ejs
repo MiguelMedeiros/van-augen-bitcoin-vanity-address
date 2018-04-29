@@ -1,24 +1,3 @@
 <%- include partials/header.ejs %>
-	<main>
-		<h1>Bitcoin Vanity Address<br/>Wallet Generator</h1>
-		<div class="vanity-form">
-			<input type="text" id="text-vanity" />
-			<div id="alert-message"></div>
-			<a class="button create-address" href="javascript:createWallet();" >Generate Vanity Wallet</a>
-			<a class="button cancel-address" href="javascript:cancelWallet();" >Cancel Process <i class="fas fa-circle-notch fa-spin"></i></a>
-		</div>
-		<div class="result-address">
-			<div class="result attempts"><b>Number of attempts:</b> <span></span></div>
-			<div class="result public-key">
-				<b>Bitcoin Address:</b><br/>
-				<span></span><br/>
-				<button class="btn clipboard" data-clipboard-text="" >Copy <i class="fas fa-paste"></i></button>
-			</div>
-			<div class="result private-key">
-				<b>Private Key (WIF):</b><br/>
-				<span></span><br/>
-				<button class="btn clipboard" data-clipboard-text="" >Copy <i class="fas fa-paste"></i></button>
-			</div>
-		</div>
-	</main>
+<%- include partials/main.ejs %>
 <%- include partials/footer.ejs %>

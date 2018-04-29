@@ -7,6 +7,7 @@ var os = require('os');
 // helper variables to keep current search state
 var oldResponse = null;
 var pool = null;
+var coresAllowed = 1;
 
 function killPool() {
 	if (pool) {
@@ -20,10 +21,15 @@ router.get('/', function(req, res, next) {
 	res.render('index', { title: 'Express' });
 });
 
+router.get('/coreNumbers', function(req, res, next) {
+	cores = os.cpus();
+	res.send(cores);
+});
+
 router.post('/generateWallet', function(req, res, next) {
 	// save response to be used on /cancelWallet
 	oldResponse = res;
-
+	coresAllowed = req.body.coresAllowed;
 	// kill any old thread pool
 	killPool();
 	pool = new Pool();
@@ -33,7 +39,7 @@ router.post('/generateWallet', function(req, res, next) {
 		var result = vanity.generateVanityWallet(input, progress);
 		done(result);
 	});
-	for (var i=0; i < os.cpus().length; i++) {
+	for (var i=0; i < coresAllowed; i++) {
 		var task = pool.send(req.body.textVanity);
 		task.on('done', function(response) {
 			res.send(response);

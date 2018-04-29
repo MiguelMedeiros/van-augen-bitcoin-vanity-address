@@ -36,6 +36,18 @@ $( document ).ready(function() {
 		hideTooltip();
 	});
 
+	$.get("/coreNumbers", function(data){
+		var slider = document.getElementById("core-slider");
+		var output = document.getElementById("core-number");
+		output.innerHTML = slider.value; // Display the default slider value
+
+		$("#core-slider").attr('max', data.length);
+		// Update the current slider value (each time you drag the slider handle)
+		slider.oninput = function() {
+		    output.innerHTML = this.value;
+		}
+	});
+
 });
 
 function hideTooltip() {
@@ -59,6 +71,7 @@ function validateTextVanity(textVanity){
 
 function createWallet(){
 	var textVanity = $("#text-vanity").val();
+	var coresAllowed = $("#core-slider").val();
 	$(".result-address").hide();
 
 	$("body").removeClass("stop-animation");
@@ -72,9 +85,11 @@ function createWallet(){
 		$('.cancel-address').show();
 		$('.create-address').hide();
 
+
 		// ajax call
 		$.post("/generateWallet", {
-			textVanity: textVanity
+			textVanity: textVanity,
+			coresAllowed: coresAllowed
 		}).done(function(data){
 
 			if(data){
@@ -112,7 +127,7 @@ function cancelWallet(){
 		$('#text-vanity').prop('disabled', false);
 		$('.create-address').show();
 		$('.cancel-address').hide();
-		
+
 		// stop animation on background
 		$("body").addClass("stop-animation");
 	});
