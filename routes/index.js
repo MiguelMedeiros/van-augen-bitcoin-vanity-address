@@ -2,16 +2,16 @@ var express = require('express');
 var router = express.Router();
 const spawn = require('threads').spawn;
 const Pool = require('threads').Pool;
-var os = require('os')
+var os = require('os');
 
 // helper variables to keep current search state
-var oldResponse = null
+var oldResponse = null;
 var pool = null;
 
 function killPool() {
 	if (pool) {
-		pool.killAll()
-		pool = null
+		pool.killAll();
+		pool = null;
 	}
 }
 
@@ -22,11 +22,11 @@ router.get('/', function(req, res, next) {
 
 router.post('/generateWallet', function(req, res, next) {
 	// save response to be used on /cancelWallet
-	oldResponse = res
+	oldResponse = res;
 
 	// kill any old thread pool
-	killPool()
-	pool = new Pool()
+	killPool();
+	pool = new Pool();
 	// spawn a new search
 	const job = pool.run(function(input, done, progress) {
 		var vanity = require('./../../../../components/vanity');
@@ -36,8 +36,8 @@ router.post('/generateWallet', function(req, res, next) {
 	for (var i=0; i < os.cpus().length; i++) {
 		var task = pool.send(req.body.textVanity);
 		task.on('done', function(response) {
-			res.send(response)
-			killPool()
+			res.send(response);
+			killPool();
 		}).on('progress', function(progress) {
 		});
 	}
@@ -45,12 +45,12 @@ router.post('/generateWallet', function(req, res, next) {
 
 router.get('/cancelWallet', function(req, res, next) {
 	// stop current thread if any
-	killPool()
+	killPool();
 
 	// inform ui the old search was cancelled
 	if (oldResponse && oldResponse.send) {
-		oldResponse.send(false)
-		oldResponse = null
+		oldResponse.send(false);
+		oldResponse = null;
 	}
 	res.send(true);
 });
