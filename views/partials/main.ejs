@@ -6,23 +6,28 @@
 				<input type="text" id="text-vanity" />
 				<div class="options" >
 					<div class="core-container">
+						<i class="fas fa-microchip"></i> Number of cores: <span class="core-number" id="core-number"></span><br/>
 						<input type="range" min="1" max="100" value="1" class="slider" id="core-slider">
-						<div class="core-number" id="core-number"></div>
 					</div>
 					<div class="case-sensitive">
-						<input id="case-sensitive" type="checkbox" value="1"> 
-						<label for="case-sensitive">Case Sensitive</label>
+						Case Sensitive:
+						<select id="case-sensitive">
+							<option value="0">No</option>
+							<option value="1">Yes</option>
+						</select>
 					</div>
 					<div class="string-end">
+						Text Vanity Location:
 						<select id="string-end">
 							<option value="start">Begining</option>
 							<option value="end">End</option>
 						</select>
 					</div>
 					<div class="wallet-type">
+						Wallet Type:
 						<select id="wallet-type">
-							<option value="start">Legacy</option>
-							<option value="end">Segwit</option>
+							<option value="legacy">Legacy</option>
+							<option value="segwit">Segwit P2SH</option>
 						</select>
 					</div>
 				</div>

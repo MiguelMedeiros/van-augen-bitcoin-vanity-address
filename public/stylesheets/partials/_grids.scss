@@ -94,8 +94,13 @@
 
 
 // options
-.core-container{
-	width: 250px;
+.options{
+	width: 300px;
 	margin: auto;
 }
+.core-container, .case-sensitive, .string-end, .wallet-type{
+	display: block;
+	margin: 0.5rem auto;
+}
+
 

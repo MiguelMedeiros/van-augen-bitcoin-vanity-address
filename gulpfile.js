@@ -12,6 +12,7 @@ var   config = {
             './node_modules/bootstrap/dist/js/bootstrap.min.js',
             './public/javascripts/vendor/clipboard.min.js',
             './public/javascripts/vendor/qrcode.min.js',
+            './public/javascripts/vendor/jquery.mask.min.js',
             './public/javascripts/app/**/*.js'
       ],
       styles:[
