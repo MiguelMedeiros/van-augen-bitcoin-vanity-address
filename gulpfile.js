@@ -11,6 +11,7 @@ var   config = {
             './node_modules/popper.js/dist/umd/popper.min.js',
             './node_modules/bootstrap/dist/js/bootstrap.min.js',
             './public/javascripts/vendor/clipboard.min.js',
+            './public/javascripts/vendor/qrcode.min.js',
             './public/javascripts/app/**/*.js'
       ],
       styles:[

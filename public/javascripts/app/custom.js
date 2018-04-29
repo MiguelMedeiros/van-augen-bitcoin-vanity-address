@@ -25,6 +25,12 @@ $( document ).ready(function() {
 		}
 	});
 
+	// vanity form submit
+	$( "#vanity-form" ).submit(function( event ) {
+		createWallet();
+		event.preventDefault();
+	});
+
 });
 
 function hideTooltip() {
@@ -49,6 +55,9 @@ function validateTextVanity(textVanity){
 function createWallet(){
 	var textVanity = $("#text-vanity").val();
 	var coresAllowed = $("#core-slider").val();
+	var caseSensitive = $("#case-sensitive").is(':checked');
+	var stringEnd = $("#string-end").val();
+
 	$(".result-address").hide();
 
 	$("body").removeClass("stop-animation");
@@ -62,11 +71,12 @@ function createWallet(){
 		$('.cancel-address').show();
 		$('.create-address').hide();
 
-
 		// ajax call
 		$.post("/generateWallet", {
 			textVanity: textVanity,
-			coresAllowed: coresAllowed
+			coresAllowed: coresAllowed,
+			caseSensitive: caseSensitive,
+			stringEnd: stringEnd
 		}).done(function(data){
 
 			if(data){
@@ -76,10 +86,12 @@ function createWallet(){
 				// public key
 				$(".public-key span").text(data[0]);
 				$(".public-key .clipboard").attr("data-clipboard-text", data[0]);
+				createQRcode("qrcode-btc-public-key", data[0]);
 
 				// private key (wif)
 				$(".private-key span").text(data[1]);
 				$(".private-key .clipboard").attr("data-clipboard-text", data[1]);
+				createQRcode("qrcode-btc-private-key", data[1]);
 				
 				// show result
 				$(".result-address").fadeIn();
@@ -96,6 +108,16 @@ function createWallet(){
 	}
 }
 
+function createQRcode(elementID, text){
+	var qrcode = new QRCode(elementID, {
+		text: text,
+		width: 128,
+		height: 128,
+		colorDark : "#000000",
+		colorLight : "transparent",
+		correctLevel : QRCode.CorrectLevel.H
+	});
+}
 
 function cancelWallet(){
 	$.get("/cancelWallet", function(data){

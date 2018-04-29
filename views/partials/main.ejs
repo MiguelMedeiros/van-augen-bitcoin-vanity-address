@@ -1,27 +1,42 @@
 	<main>
 		<h1>Bitcoin Vanity Address<br/>Wallet Generator</h1>
+		<p>haeuEAU aeuhueahu ae uehau uae hu hau hau hae uaehueah uah</p>
 		<div class="vanity-form">
-			<input type="text" id="text-vanity" />
-			<div class="options" >
-				<div class="core-container">
-					<input type="range" min="1" max="100" value="1" class="slider" id="core-slider">
-					<div class="core-number" id="core-number"></div>
+			<form id="vanity-form">
+				<input type="text" id="text-vanity" />
+				<div class="options" >
+					<div class="core-container">
+						<input type="range" min="1" max="100" value="1" class="slider" id="core-slider">
+						<div class="core-number" id="core-number"></div>
+					</div>
+					<div class="case-sensitive">
+						<input id="case-sensitive" type="checkbox" value="1"> 
+						<label for="case-sensitive">Case Sensitive</label>
+					</div>
+					<div class="string-end">
+						<select id="string-end">
+							<option value="start">Begining</option>
+							<option value="end">End</option>
+						</select>
+					</div>
 				</div>
-			</div>
-			<div id="alert-message"></div>
-			<a class="button create-address" href="javascript:createWallet();" >Generate Vanity Wallet</a>
-			<a class="button cancel-address" href="javascript:cancelWallet();" >Cancel Process <i class="fas fa-circle-notch fa-spin"></i></a>
+				<div id="alert-message"></div>
+				<input class="button create-address" type="submit" value="Generate Vanity Wallet" />
+				<a class="button cancel-address" href="javascript:cancelWallet();" >Cancel Process <i class="fas fa-circle-notch fa-spin"></i></a>
+			</form>
 		</div>
 		<div class="result-address">
 			<div class="result attempts"><b>Number of attempts:</b> <span></span></div>
 			<div class="result public-key">
 				<b>Bitcoin Address:</b><br/>
 				<span></span><br/>
+				<div id="qrcode-btc-public-key"></div>
 				<button class="btn clipboard" data-clipboard-text="" >Copy <i class="fas fa-paste"></i></button>
 			</div>
 			<div class="result private-key">
 				<b>Private Key (WIF):</b><br/>
 				<span></span><br/>
+				<div id="qrcode-btc-private-key"></div>
 				<button class="btn clipboard" data-clipboard-text="" >Copy <i class="fas fa-paste"></i></button>
 			</div>
 		</div>

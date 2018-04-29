@@ -27,12 +27,17 @@ router.get('/coreNumbers', function(req, res, next) {
 });
 
 router.post('/generateWallet', function(req, res, next) {
+
+	console.log("Searching for Vanity Address!");
+	
 	// save response to be used on /cancelWallet
 	oldResponse = res;
 	coresAllowed = req.body.coresAllowed;
+
 	// kill any old thread pool
 	killPool();
 	pool = new Pool();
+
 	// spawn a new search
 	const job = pool.run(function(input, done, progress) {
 		var vanity = require('./../../../../components/vanity');
@@ -47,6 +52,9 @@ router.post('/generateWallet', function(req, res, next) {
 		}).on('progress', function(progress) {
 		});
 	}
+	req.on('close', function (err){
+       killPool();
+    });
 });
 
 router.get('/cancelWallet', function(req, res, next) {
