@@ -33,6 +33,10 @@ router.post('/generateWallet', function(req, res, next) {
 	// save response to be used on /cancelWallet
 	oldResponse = res;
 	coresAllowed = req.body.coresAllowed;
+	caseSensitive = req.body.caseSensitive;
+	stringEnd = req.body.stringEnd;
+	walletType = req.body.walletType;
+	console.log(walletType)
 
 	// kill any old thread pool
 	killPool();
@@ -45,7 +49,7 @@ router.post('/generateWallet', function(req, res, next) {
 		done(result);
 	});
 	for (var i=0; i < coresAllowed; i++) {
-		var task = pool.send(req.body.textVanity);
+		var task = pool.send({query: req.body.textVanity, caseSensitive: caseSensitive, stringEnd: stringEnd, walletType: walletType });
 		task.on('done', function(response) {
 			res.send(response);
 			killPool();
@@ -53,8 +57,8 @@ router.post('/generateWallet', function(req, res, next) {
 		});
 	}
 	req.on('close', function (err){
-       killPool();
-    });
+		killPool();
+	});
 });
 
 router.get('/cancelWallet', function(req, res, next) {
