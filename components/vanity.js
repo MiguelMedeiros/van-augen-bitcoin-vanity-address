@@ -148,13 +148,6 @@ var generateVanityWallet = function(options, progress){
 	return generateVanityWalletCustom(options, progress);
 }
 
-var generateVanityWallet = function(options, progress){
-	if (options.walletType == "segwit") {
-		return generateVanityWalletBitcoinJS(options, progress);
-	}
-	return generateVanityWalletCustom(options, progress);
-}
-
 module.exports = {
 	generateVanityWallet : generateVanityWallet
 }
