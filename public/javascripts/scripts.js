@@ -143,6 +143,7 @@ function createWallet(){
 		$('.cancel-address').css("display", "block");
 		$('.cancel-address').show();
 		$('.create-address').hide();
+		$('.eye').addClass('readEye');
 
 		// ajax call
 		$.post("/generateWallet", {
@@ -205,6 +206,7 @@ function createWallet(){
 				}
 
 				// change buttons and options
+				$('.eye').removeClass('readEye');
 				$('#text-vanity').prop('disabled', false);
 				$('select').prop('disabled', false);
 				$('input[type="range"]').prop('disabled', false);
@@ -231,7 +233,8 @@ function cancelWallet(){
 		$('.create-address').show(200);
 		$('.cancel-address').fadeOut(200);
 
-		// stop animation on background
+		// stop animations
+		$('.eye').removeClass('readEye');
 		$("body").addClass("stop-animation");
 	});
 }

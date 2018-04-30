@@ -1,0 +1,78 @@
+.logo{
+    display: block;
+    position: relative;
+    width: 85px;
+    height: 85px;
+    margin: auto;
+    margin-bottom: 1rem;
+}
+.eye-container{
+    width: 85px;
+    height: 85px;
+    background: #fff;
+    border-radius: 50%;
+}
+.eye {
+    margin: 60px auto;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #9b88c0;
+    transform: rotate(-65deg);
+    position: relative;
+    transition: all 2000ms;
+    top: 21px;
+    left: 1px;
+    &::before {
+        content: '';
+        display: block;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #603a91;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+    }
+    &::after {
+        content: '';
+        display: block;
+        width: 13px;
+        height: 13px;
+        background: white;
+        border-radius: 50%;
+        position: absolute;
+        top: 18px;
+        right: 5px;
+    }
+}
+.readEye{
+    top: 26px;
+    animation: readEye 1s linear infinite;
+}
+
+@keyframes readEye{
+    0%{
+        top: 26px;
+        left: 1px;
+    }
+    10%{
+        top: 26px;
+        left: 6px;
+    }
+    16%{
+        top: 26px;
+        left: 1px;
+    }
+    90%{
+        top: 26px;
+        left: -5px;
+    }
+    100%{
+        top: 26px;
+        left: 1px;
+    }
+}
