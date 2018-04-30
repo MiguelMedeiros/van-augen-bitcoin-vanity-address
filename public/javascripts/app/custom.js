@@ -81,7 +81,7 @@ function validateTextVanity(textVanity){
 function createWallet(){
 	var textVanity = $("#text-vanity").val();
 	var coresAllowed = $("#core-slider").val();
-	var caseSensitive = $("#case-sensitive").is(':checked');
+	var caseSensitive = $("#case-sensitive");
 	var stringLocation = $("#string-location").val();
 	var walletType = $("#wallet-type").val();
 
