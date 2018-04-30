@@ -31,6 +31,9 @@ router.get('/coreNumbers', function(req, res, next) {
 router.post('/generateWallet', function(req, res, next) {
 
 	console.log("Searching for Vanity Address!");
+
+	// prevent your request to fail
+	req.setTimeout(0);
 	
 	// save response to be used on /cancelWallet
 	oldResponse = res;
@@ -64,6 +67,7 @@ router.post('/generateWallet', function(req, res, next) {
 		});
 	}
 	req.on('close', function (err){
+		console.log("Process closed!");
 		killPool();
 	});
 });
