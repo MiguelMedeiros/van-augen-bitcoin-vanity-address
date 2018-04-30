@@ -1,5 +1,4 @@
 var bitcoin = require('bitcoinjs-lib');
-var CryptoJS = require('cryptojs').Crypto;
 var bs58 = require('bs58');
 var ec = require('eccrypto');
 var randomBytes = require('randombytes')
@@ -12,7 +11,7 @@ function SHA256(data) {
 var getBitcoinWallet = function (){
 
 	// passo 1 - criar uma variavel com 32 bytes randomicos
-	var privateKey = randomBytes(32)
+	var privateKey = randomBytes(32);
 
 	var publicKey = ec.getPublic(Buffer(privateKey));
 
@@ -28,7 +27,7 @@ var getBitcoinWallet = function (){
 	var hash160 = bitcoin.crypto.ripemd160(publicKeySHA256);
 
 	// passo 4 - adicionar versao na frente
-	var hashEBytes = Buffer.concat([versao,hash160]) 
+	var hashEBytes = Buffer.concat([versao,hash160]);
 
 	// passo 5 - primeiro hash sha256 do passo 4
 	var firstSHA = SHA256(hashEBytes);
@@ -49,22 +48,22 @@ var getBitcoinWallet = function (){
 }
 
 var generateWIF = function (privateKey){
-	var version = Buffer.from('80', 'hex')
+	var version = Buffer.from('80', 'hex');
 
 	// passo 1 - adicionar versao no comeco da chave privada: https://en.bitcoin.it/wiki/List_of_address_prefixes
-	var versionAndPrivateKey = Buffer.concat([version,privateKey])
+	var versionAndPrivateKey = Buffer.concat([version,privateKey]);
 
 	// passo 2 - hash sha256 do passo anterior
-	var firstSHA = SHA256(versionAndPrivateKey)
+	var firstSHA = SHA256(versionAndPrivateKey);
 
 	// passo 3 - hash sha256 do passo anterior (de novo)
-	var secondSHA = SHA256(firstSHA)
+	var secondSHA = SHA256(firstSHA);
 
 	// passo 4 - retirar os 4 primeiros bytes do passo 4 e salvar como checksum
-	var checksum = secondSHA.slice(0,4)
+	var checksum = secondSHA.slice(0,4);
 
 	// passo 5 - juntar '80' com a chave privada e adicionar o checksum ao final
-	var versionAndPrivateKeyAndChecksum = Buffer.concat([versionAndPrivateKey, checksum])
+	var versionAndPrivateKeyAndChecksum = Buffer.concat([versionAndPrivateKey, checksum]);
 
 	// passo 6 - codificar para base58
 	var wif =  bs58.encode(versionAndPrivateKeyAndChecksum);
@@ -80,7 +79,7 @@ var generateVanityWalletCustom = function(options, progress) {
 	while(1) {
 		i++;
 		var found = false;
-		var startAddress
+		var startAddress;
 		result = getBitcoinWallet();
 		if (!start) {
 			startAddress = result[0].substr(result[0].length-options.query.length, options.query.length);
@@ -98,7 +97,7 @@ var generateVanityWalletCustom = function(options, progress) {
 			return ([result[0], generateWIF(result[1]), i]);
 		}
 		if (i>1000) {
-			progress(i)
+			progress(i);
 			i = 0;
 		}
 	}
@@ -135,7 +134,7 @@ var generateVanityWalletBitcoinJS = function(options, progress) {
 			return ([address, keyPair.toWIF(), i]);
 		}
 		if (i>1000) {
-			progress(i)
+			progress(i);
 			i = 0;
 		}
 	}
