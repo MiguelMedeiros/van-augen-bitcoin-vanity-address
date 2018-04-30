@@ -156,9 +156,9 @@ function createWallet(){
 				}
 
 				if(caseSensitive == '0'){
-					$(".result-container .case-sensitive span").text('false');
+					$(".result-container .case-sensitive span").text('No');
 				}else{
-					$(".result-container .case-sensitive span").text('true');
+					$(".result-container .case-sensitive span").text('Yes');
 				}
 
 				// change buttons and options
