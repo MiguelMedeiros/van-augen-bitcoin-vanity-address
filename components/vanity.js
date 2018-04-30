@@ -8,6 +8,21 @@ function SHA256(data) {
 	return crypto.createHash('sha256').update(data, 'utf8').digest();
 }
 
+function checkMatch(address, start, caseSensitive, query, upperCaseQuery) {
+	var startAddress;
+	if (!start) {
+		startAddress = address.substr(address.length-query.length, query.length);
+	} else {
+		startAddress = address.substr(1,query.length);
+	}
+	if (caseSensitive) {
+		found = (startAddress == query);
+	} else {
+		found = (startAddress.toUpperCase() == upperCaseQuery);
+	}
+	return found
+}
+
 var getBitcoinWallet = function (){
 
 	// passo 1 - criar uma variavel com 32 bytes randomicos
@@ -79,23 +94,14 @@ var generateVanityWalletCustom = function(options, progress) {
 	while(1) {
 		i++;
 		var found = false;
-		var startAddress;
 		result = getBitcoinWallet();
-		if (!start) {
-			startAddress = result[0].substr(result[0].length-options.query.length, options.query.length);
-		} else {
-			startAddress = result[0].substr(1,options.query.length);
-		}
-		if (caseSensitive) {
-			found = (startAddress == options.query);
-		} else {
-			found = (startAddress.toUpperCase() == upperCaseQuery);
-		}
+		var found = checkMatch(result[0], start, caseSensitive, options.query, upperCaseQuery);
 
 		if(found) {
 			console.log("Number of created addresses to find your vanity address: "+i);
 			return ([result[0], generateWIF(result[1]), i]);
 		}
+
 		if (i>1000) {
 			progress(i);
 			i = 0;
@@ -118,17 +124,7 @@ var generateVanityWalletBitcoinJS = function(options, progress) {
 		var scriptPubKey = bitcoin.script.scriptHash.output.encode(bitcoin.crypto.hash160(redeemScript));
 		address = bitcoin.address.fromOutputScript(scriptPubKey);
 
-		if (!start) {
-			startAddress = address.substr(address.length-options.query.length, options.query.length);
-		} else {
-			startAddress = address.substr(1,options.query.length);
-		}
-		if (caseSensitive) {
-			found = (startAddress == options.query);
-		} else {
-			found = (startAddress.toUpperCase() == upperCaseQuery);
-		}
-
+		var found = checkMatch(address, start, caseSensitive, options.query, upperCaseQuery);
 		if(found) {
 			console.log("Number of created addresses to find your vanity address: "+i);
 			return ([address, keyPair.toWIF(), i]);
