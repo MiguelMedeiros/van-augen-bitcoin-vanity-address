@@ -30,6 +30,7 @@
     "os": "^0.1.1",
     "popper.js": "^1.14.3",
     "serve-favicon": "~2.4.5",
+    "sodium": "^2.0.3",
     "threads": "^0.10.1"
   }
 }
