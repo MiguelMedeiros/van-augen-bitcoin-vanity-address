@@ -8,51 +8,49 @@
 		width: 200px;
 		padding: 10px;
 		border-radius: 5px;
-		border: 1px solid #ccc;
+		border: 0;
 		text-align: center;
 		font-size: 1.4rem;
 		outline: 0;
+		box-shadow: 0 8px 28px rgba(0,0,0,0.15), 0 8px 10px rgba(0,0,0,0.12);
+		transition: all 300ms;
+		&:hover, &:focus{
+			box-shadow: 0 2px 22px rgba(0,0,0,0.25), 0 2px 4px rgba(0,0,0,0.22);
+		}
 	}
 }
 .button{
-	display: block;
+	display: none;
 	margin: 1rem auto;
 	background: #fff;
 	width: 200px;
-	padding: 10px;
+	padding: 1rem;
 	border-radius: 5px;
-	border: 1px solid #ccc;
-	color: #000;
+	border: 0;
+	color: #fff;
+	cursor: pointer;
+	box-shadow: 0 8px 28px rgba(0,0,0,0.15), 0 8px 10px rgba(0,0,0,0.12);
+	transition: all 300ms;
 	&:hover, &:focus{
 		text-decoration: none;
 		color: #fff;
+		box-shadow: 0 2px 22px rgba(0,0,0,0.25), 0 2px 4px rgba(0,0,0,0.22);
 	}
 }
 
 .create-address{
+	background: #FFA900;
+	//color: #000;
 	&:hover, &:focus{
-		background: green;
 	}
 }
 
 .cancel-address{
+	background: #b91a04;
 	display: none;
 	&:hover, &:focus{
 		background: red;
 	}
-}
-
-//results
-.result{
-	margin: 1rem;
-}
-.result-address{
-	display: none;
-	margin: auto;
-	text-align: left;
-	width: 100%;
-	max-width: 650px;
-	word-wrap: break-word;
 }
 
 //messages
@@ -60,7 +58,7 @@
 	display: none;
 }
 .error{
-	border: 1px solid red !important;
+	background: #fbc1d5;
 }
 
 
@@ -72,18 +70,16 @@
     border-radius: 5px;   
     background: #d3d3d3;
     outline: none;
-    opacity: 0.7;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
 }
 
 .slider::-webkit-slider-thumb {
+	box-shadow: 0 5px 5px rgba(0,0,0,0.15), 0 5px 5px rgba(0,0,0,0.12);
     -webkit-appearance: none;
     appearance: none;
     width: 25px;
     height: 25px;
     border-radius: 50%; 
-    background: #4CAF50;
+    background: #21ABA5;
     cursor: pointer;
 }
 
@@ -96,11 +92,75 @@
 // options
 .options{
 	width: 300px;
-	margin: auto;
+	margin: 1rem auto 0;
+	display: none;
+	.fas{
+		width: 18px;
+	}
 }
-.core-container, .case-sensitive, .string-end, .wallet-type{
+.core-container, .case-sensitive, .string-location, .wallet-type{
+	display: inline-block;
+	margin: 0.75rem auto;
+	text-align: left;
+}
+
+//results
+.result-container, .addresses{
+	@include make-container();
+}
+.result-text-container{
+	background: rgba(37, 97, 109, 0.6);
+	border-radius: 5px;
+	padding: 1rem;
 	display: block;
-	margin: 0.5rem auto;
+	margin: 2rem auto 0;
+	width: 430px;
 }
-
-
+.result-text{
+	display: block;
+	text-align: left;
+	max-width: 300px;
+	margin: 1rem auto;
+	span{
+		display: inline-block;
+		float: right;
+	}
+}
+select{
+	display: block;
+	width: 200px !important;
+	padding: 1rem;
+	border: 0;
+	border-radius: 5px;
+	margin: auto;
+	box-shadow: 0 8px 28px rgba(0,0,0,0.15), 0 8px 10px rgba(0,0,0,0.12);
+	transition: all 300ms;
+	&:hover, &:focus{
+		box-shadow: 0 2px 22px rgba(0,0,0,0.25), 0 2px 4px rgba(0,0,0,0.22);
+	}
+	option{
+		text-align: center;
+	}
+}
+.address{
+	margin-bottom: 2rem;
+	.qrcode{
+		img{						
+			margin: 1rem auto;
+		}
+	}
+	.btn{
+		margin-bottom: 1rem;
+	}
+}
+.result-container{
+	display: none;
+	margin: auto;
+	width: 100%;
+	max-width: 650px;
+	word-wrap: break-word;
+}
+.public-key, .private-key{
+	@include make-col(6);
+	padding: 2rem;
+}

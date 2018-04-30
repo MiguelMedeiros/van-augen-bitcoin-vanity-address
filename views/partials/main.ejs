@@ -1,30 +1,30 @@
 	<main>
 		<h1>Bitcoin Vanity Address<br/>Wallet Generator</h1>
-		<p>haeuEAU aeuhueahu ae uehau uae hu hau hau hae uaehueah uah</p>
+		<p>Make it really simple to make bitcoin custom addresses.</p>
 		<div class="vanity-form">
 			<form id="vanity-form">
-				<input type="text" id="text-vanity" />
+				<input type="text" id="text-vanity" autocomplete="off" />
 				<div class="options" >
 					<div class="core-container">
 						<i class="fas fa-microchip"></i> Number of cores: <span class="core-number" id="core-number"></span><br/>
 						<input type="range" min="1" max="100" value="1" class="slider" id="core-slider">
 					</div>
 					<div class="case-sensitive">
-						Case Sensitive:
+						<i class="fas fa-keyboard"></i> Case Sensitive<br/>
 						<select id="case-sensitive">
 							<option value="0">No</option>
 							<option value="1">Yes</option>
 						</select>
 					</div>
-					<div class="string-end">
-						Text Vanity Location:
-						<select id="string-end">
-							<option value="start">Begining</option>
-							<option value="end">End</option>
+					<div class="string-location">
+						<i class="fas fa-location-arrow"></i> Text Vanity Location<br/>
+						<select id="string-location">
+							<option value="start">Start with text</option>
+							<option value="end">End with text</option>
 						</select>
 					</div>
 					<div class="wallet-type">
-						Wallet Type:
+						<i class="fas fa-lock"></i> Wallet Type<br/>
 						<select id="wallet-type">
 							<option value="legacy">Legacy</option>
 							<option value="segwit">Segwit P2SH</option>
@@ -36,19 +36,30 @@
 				<a class="button cancel-address" href="javascript:cancelWallet();" >Cancel Process <i class="fas fa-circle-notch fa-spin"></i></a>
 			</form>
 		</div>
-		<div class="result-address">
-			<div class="result attempts"><b>Number of attempts:</b> <span></span></div>
-			<div class="result public-key">
-				<b>Bitcoin Address:</b><br/>
-				<div id="qrcode-btc-public-key"></div>
-				<span></span><br/>
-				<button class="btn clipboard" data-clipboard-text="" >Copy <i class="fas fa-paste"></i></button>
+		<div class="result-container">
+			<div class="result-text-container">
+				<div class="result-text attempts"><i class="fas fa-hourglass-half"></i> <b>Number of attempts:</b> <span></span></div>
+				<div class="result-text wallet-type"><i class="fas fa-lock"></i> <b>Wallet Type:</b> <span></span></div>
+				<div class="result-text string-location"><i class="fas fa-location-arrow"></i> <b>Text Vanity Location:</b> <span></span></div>
+				<div class="result-text case-sensitive"><i class="fas fa-keyboard"></i> <b>Case Sensitive:</b> <span></span></div>
 			</div>
-			<div class="result private-key">
-				<b>Private Key (WIF):</b><br/>
-				<div id="qrcode-btc-private-key"></div>
-				<span></span><br/>
-				<button class="btn clipboard" data-clipboard-text="" >Copy <i class="fas fa-paste"></i></button>
+			<div class="address">
+				<div class="row">
+					<div class="result public-key">
+						<h2>Bitcoin Address</h2>
+						<div class="description">Free to share to everyone</div>
+						<div class="qrcode" id="qrcode-btc-public-key"></div>
+						<button class="btn clipboard" data-clipboard-text="" >Copy <i class="fas fa-paste"></i></button>
+						<span></span><br/>
+					</div>
+					<div class="result private-key">
+						<h2>Private Key (WIF)</h2>
+						<div class="description">Never share to anyone</div>
+						<div class="qrcode" id="qrcode-btc-private-key"></div>
+						<button class="btn clipboard" data-clipboard-text="" >Copy <i class="fas fa-paste"></i></button>
+						<span></span><br/>
+					</div>
+				</div>
 			</div>
 		</div>
 	</main>

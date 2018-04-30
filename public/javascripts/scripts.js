@@ -60,8 +60,7 @@ $( document ).ready(function() {
 	$.get("/coreNumbers", function(data){
 		var slider = document.getElementById("core-slider");
 		var output = document.getElementById("core-number");
-		output.innerHTML = slider.value; // Display the default slider value
-
+		output.innerHTML = 1; // Display the default slider value		
 		$("#core-slider").attr('max', data.length);
 		// Update the current slider value (each time you drag the slider handle)
 		slider.oninput = function() {
@@ -76,6 +75,30 @@ $( document ).ready(function() {
 	$( "#vanity-form" ).submit(function( event ) {
 		createWallet();
 		event.preventDefault();
+	});
+
+	// show options on focus
+	$("#text-vanity").click(function(){
+		if(this.value != ""){
+			$(".options").fadeIn(200);
+			$(".create-address").fadeIn(200);			
+			$("main").addClass("no-margin");
+		}else{
+			$(".options").fadeOut(200);
+			$(".create-address").fadeOut(200);			
+			$("main").removeClass("no-margin");
+		}
+	});
+	$("#text-vanity").keyup(function(){
+		if(this.value != ""){
+			$(".options").fadeIn(200);
+			$(".create-address").fadeIn(200);			
+			$("main").addClass("no-margin");
+		}else{
+			$(".options").fadeOut(200);
+			$(".create-address").fadeOut(200);			
+			$("main").removeClass("no-margin");
+		}
 	});
 
 });
@@ -103,10 +126,10 @@ function createWallet(){
 	var textVanity = $("#text-vanity").val();
 	var coresAllowed = $("#core-slider").val();
 	var caseSensitive = $("#case-sensitive").is(':checked');
-	var stringEnd = $("#string-end").val();
+	var stringLocation = $("#string-location").val();
 	var walletType = $("#wallet-type").val();
 
-	$(".result-address").hide();
+	$(".result-container").hide();
 
 	$("body").removeClass("stop-animation");
 
@@ -115,6 +138,8 @@ function createWallet(){
 		
 		// change buttons
 		$('#text-vanity').prop('disabled', true);
+		$('select').prop('disabled', true);
+		$('input[type="range"]').prop('disabled', true);
 		$('.cancel-address').css("display", "block");
 		$('.cancel-address').show();
 		$('.create-address').hide();
@@ -124,7 +149,7 @@ function createWallet(){
 			textVanity: textVanity,
 			coresAllowed: coresAllowed,
 			caseSensitive: caseSensitive,
-			stringEnd: stringEnd,
+			stringLocation: stringLocation,
 			walletType: walletType
 		}).done(function(data){
 
@@ -159,12 +184,35 @@ function createWallet(){
 				});
 
 				// show result
-				$(".result-address").fadeIn();
+				$(".result-container").fadeIn();
 
-				// change buttons
+				if(walletType == 'legacy'){
+					$(".result-container .wallet-type span").text('Legacy');
+				}else{
+					$(".result-container .wallet-type span").text('Segwit');
+				}
+
+				if(stringLocation == 'start'){
+					$(".result-container .string-location span").text('Start with text');
+				}else{
+					$(".result-container .string-location span").text('End with text');
+				}
+
+				if(caseSensitive == '1'){
+					$(".result-container .case-sensitive span").text('false');
+				}else{
+					$(".result-container .case-sensitive span").text('true');
+				}
+
+				// change buttons and options
 				$('#text-vanity').prop('disabled', false);
-				$('.create-address').show();
-				$('.cancel-address').hide();
+				$('select').prop('disabled', false);
+				$('input[type="range"]').prop('disabled', false);
+				$('.cancel-address').fadeOut(200);
+				$('.create-address').fadeOut(200);
+				$(".options").fadeOut(200);
+				$(".create-address").fadeOut(200);			
+				$("main").addClass("no-margin");
 
 				// stop animation on background
 				$("body").addClass("stop-animation");
@@ -178,8 +226,10 @@ function cancelWallet(){
 		
 		// change buttons
 		$('#text-vanity').prop('disabled', false);
-		$('.create-address').show();
-		$('.cancel-address').hide();
+		$('select').prop('disabled', false);
+		$('input[type="range"]').prop('disabled', false);
+		$('.create-address').show(200);
+		$('.cancel-address').fadeOut(200);
 
 		// stop animation on background
 		$("body").addClass("stop-animation");

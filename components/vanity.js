@@ -10,14 +10,14 @@ var generateVanityWallet = function(options, progress){
 		var result = false;
 		if (options.walletType == "segwit") {
 			var redeemScript = bitcoin.script.witnessPubKeyHash.output.encode(bitcoin.crypto.hash160(keyPair.getPublicKeyBuffer()));
-			var scriptPubKey = bitcoin.script.scriptHash.output.encode(bitcoin.crypto.hash160(redeemScript))
+			var scriptPubKey = bitcoin.script.scriptHash.output.encode(bitcoin.crypto.hash160(redeemScript));
 			address = bitcoin.address.fromOutputScript(scriptPubKey);
 			startAddress = address.substr(1,options.query.length);
 		} else {
 			address = keyPair.getAddress();
 			startAddress = address.substr(1,options.query.length);
 		}
-		if (options.stringEnd != 'start') {
+		if (options.stringLocation != 'start') {
 			startAddress = address.substr(address.length-options.query.length, options.query.length);
 		}
 		if (options.caseSensitive) {

@@ -1,13 +1,20 @@
 body{
 	text-align: center;
-	padding:20vh 0 0;
 	font-family: 'Roboto', sans-serif;
-	width: 100wh;
-	height: 90vh;
 	color: #fff;
-	background: linear-gradient(45deg, #1D566E, #21ABA5, #163A5F);
+	height: 100%;
+	//background: linear-gradient(45deg, #1D566E, #21ABA5, #163A5F);
+	background: linear-gradient(45deg, #283149, #21ABA5, #163A5F);
 	background-size: 400% 200%;
-	animation: gradient 15s ease infinite;
+	animation: gradient 5s ease infinite;
+}
+
+main{
+	margin-top: 30vh;
+	transition: 500ms all;
+}
+main.no-margin{
+	margin-top: 7vh;
 }
 
 h1{
