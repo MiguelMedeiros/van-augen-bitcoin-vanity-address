@@ -7,10 +7,10 @@ var sodium = require('sodium').api;
 var getBitcoinWallet = function (){
 
 	// passo 1 - criar uma variavel com 32 bytes randomicos
-	var privateKey = CryptoJS.util.randomBytes(32);
-	privateKey = CryptoJS.util.bytesToHex(privateKey).toUpperCase();
+	var privateKey = Buffer.allocUnsafe(32);
+	sodium.randombytes_buf(privateKey);
 
-	var publicKey = ec.getPublic(Buffer(CryptoJS.util.hexToBytes(privateKey)));
+	var publicKey = ec.getPublic(privateKey);
 
 	// P2PKH na rede principal é 0x00, P2PKH na rede de testes é 0x6F
 	// P2SH na rede principal é 0x05, P2SH na rede de testes é 0xC4
@@ -49,7 +49,7 @@ var generateWIF = function (privateKey){
 	var version = '80'
 
 	// passo 1 - adicionar versao no comeco da chave privada: https://en.bitcoin.it/wiki/List_of_address_prefixes
-	var versionAndPrivateKey = version + privateKey
+	var versionAndPrivateKey = version + CryptoJS.util.bytesToHex(privateKey)
 
 	// passo 2 - hash sha256 do passo anterior
 	var firstSHA = CryptoJS.SHA256(CryptoJS.util.hexToBytes(versionAndPrivateKey))
@@ -100,13 +100,12 @@ var generateVanityWalletBitcoinJS = function(options, progress) {
 	i = 0;
 	var start = (options.stringLocation == 'start');
 	var caseSensitive = (options.caseSensitive == 'true');
-	console.log(options)
 	while(1) {
 		i++;
 		var keyPair = bitcoin.ECPair.makeRandom();
 		var address;
 		var startAddress;
-		var result = false;
+		var found = false;
 		var redeemScript = bitcoin.script.witnessPubKeyHash.output.encode(bitcoin.crypto.hash160(keyPair.getPublicKeyBuffer()));
 		var scriptPubKey = bitcoin.script.scriptHash.output.encode(bitcoin.crypto.hash160(redeemScript));
 		address = bitcoin.address.fromOutputScript(scriptPubKey);
@@ -117,12 +116,12 @@ var generateVanityWalletBitcoinJS = function(options, progress) {
 			startAddress = address.substr(1,options.query.length);
 		}
 		if (caseSensitive) {
-			result = (startAddress == options.query);
+			found = (startAddress == options.query);
 		} else {
-			result = (startAddress.toUpperCase() == options.query.toUpperCase());
+			found = (startAddress.toUpperCase() == options.query.toUpperCase());
 		}
 
-		if(result) {
+		if(found) {
 			console.log("Number of created addresses to find your vanity address: "+i);
 			return ([address, keyPair.toWIF(), i]);
 		}
