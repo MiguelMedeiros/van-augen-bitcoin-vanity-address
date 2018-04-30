@@ -2,15 +2,14 @@ var bitcoin = require('bitcoinjs-lib');
 var CryptoJS = require('cryptojs').Crypto;
 var bs58 = require('bs58');
 var ec = require('eccrypto');
-var sodium = require('sodium').api;
+var randomBytes = require('randombytes')
 
 var getBitcoinWallet = function (){
 
 	// passo 1 - criar uma variavel com 32 bytes randomicos
-	var privateKey = Buffer.allocUnsafe(32);
-	sodium.randombytes_buf(privateKey);
+	var privateKey = randomBytes(32)
 
-	var publicKey = ec.getPublic(privateKey);
+	var publicKey = ec.getPublic(Buffer(privateKey));
 
 	// P2PKH na rede principal é 0x00, P2PKH na rede de testes é 0x6F
 	// P2SH na rede principal é 0x05, P2SH na rede de testes é 0xC4
@@ -93,6 +92,10 @@ var generateVanityWalletCustom = function(options, progress) {
 			console.log("Number of created addresses to find your vanity address: "+i);
 			return ([result[0], generateWIF(result[1]), i]);
 		}
+		if (i>1000) {
+			progress(i)
+			i = 0;
+		}
 	}
 }
 
@@ -124,6 +127,10 @@ var generateVanityWalletBitcoinJS = function(options, progress) {
 		if(found) {
 			console.log("Number of created addresses to find your vanity address: "+i);
 			return ([address, keyPair.toWIF(), i]);
+		}
+		if (i>1000) {
+			progress(i)
+			i = 0;
 		}
 	}
 }

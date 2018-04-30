@@ -8,12 +8,14 @@ var os = require('os');
 var oldResponse = null;
 var pool = null;
 var coresAllowed = 1;
+var attempts = 0;
 
 function killPool() {
 	if (pool) {
 		pool.killAll();
 		pool = null;
 	}
+	attempts = 0;
 }
 
 /* GET home page. */
@@ -50,9 +52,15 @@ router.post('/generateWallet', function(req, res, next) {
 	for (var i=0; i < coresAllowed; i++) {
 		var task = pool.send({query: req.body.textVanity, caseSensitive: caseSensitive, stringLocation: stringLocation, walletType: walletType });
 		task.on('done', function(response) {
-			res.send(response);
+			if (attempts > 1000) {
+				response[2] = attempts + response[2];
+			}
+			if (oldResponse) {
+				oldResponse.send(response);
+			}
 			killPool();
 		}).on('progress', function(progress) {
+			attempts += progress;
 		});
 	}
 	req.on('close', function (err){
