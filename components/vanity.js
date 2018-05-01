@@ -21,7 +21,7 @@ function checkMatch(address, start, caseSensitive, query, upperCaseQuery) {
 	} else {
 		found = (startAddress.toUpperCase() == upperCaseQuery);
 	}
-	return found
+	return found;
 }
 
 var getBitcoinWallet = function (){
@@ -34,7 +34,7 @@ var getBitcoinWallet = function (){
 	// P2PKH na rede principal é 0x00, P2PKH na rede de testes é 0x6F
 	// P2SH na rede principal é 0x05, P2SH na rede de testes é 0xC4
 	// lista completa em https://en.bitcoin.it/wiki/List_of_address_prefixes
-	var versao = Buffer.from('00', 'hex');
+	var version = Buffer.from('00', 'hex');
 
 	// passo 2
 	var publicKeySHA256 = SHA256(publicKey);
@@ -43,7 +43,7 @@ var getBitcoinWallet = function (){
 	var hash160 = bitcoin.crypto.ripemd160(publicKeySHA256);
 
 	// passo 4 - adicionar versao na frente
-	var hashEBytes = Buffer.concat([versao,hash160]);
+	var hashEBytes = Buffer.concat([version,hash160]);
 
 	// passo 5 - primeiro hash sha256 do passo 4
 	var firstSHA = SHA256(hashEBytes);
@@ -55,7 +55,7 @@ var getBitcoinWallet = function (){
 	var checksum = secondSHA.slice(0,4);
 
 	// passo 8 - versão + passo 3 + passo7
-	var publicAddress = Buffer.concat([versao, hash160, checksum]);
+	var publicAddress = Buffer.concat([version, hash160, checksum]);
 
 	// passo 9 - codificar resultado do passo 8 em base58
 	publicAddress = bs58.encode(publicAddress);
