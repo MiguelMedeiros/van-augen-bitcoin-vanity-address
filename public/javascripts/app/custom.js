@@ -56,7 +56,6 @@ $( document ).ready(function() {
 			$("main").removeClass("no-margin");
 		}
 	});
-
 });
 
 function hideTooltip() {
@@ -85,6 +84,13 @@ function createWallet(){
 	var stringLocation = $("#string-location").val();
 	var walletType = $("#wallet-type").val();
 
+	// start clock counter
+	$('.counter-clock').counter({
+		initial: "00:00:00",
+        direction: 'up',
+        format: "23:59:59",
+        interval: 1000
+	});
 	$(".result-container").hide();
 
 	$("body").removeClass("stop-animation");
@@ -161,6 +167,9 @@ function createWallet(){
 					$(".result-container .case-sensitive span").text('Yes');
 				}
 
+				$(".result-container .core-number span").text(coresAllowed);
+
+
 				// change buttons and options
 				$('.eye').removeClass('readEye');
 				$('#text-vanity').prop('disabled', false);
@@ -174,6 +183,7 @@ function createWallet(){
 
 				// stop animation on background
 				$("body").addClass("stop-animation");
+				$('.counter-clock').counter("stop");
 			}
 		});
 	}

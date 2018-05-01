@@ -13,6 +13,7 @@ var   config = {
             './public/javascripts/vendor/clipboard.min.js',
             './public/javascripts/vendor/qrcode.min.js',
             './public/javascripts/vendor/jquery.mask.min.js',
+            './public/javascripts/vendor/jquery.counter.js',
             './public/javascripts/app/**/*.js'
       ],
       styles:[
