@@ -82,19 +82,6 @@ function hideTooltip() {
   	}, 700);
 }
 
-function validateTextVanity(textVanity){
-	if(textVanity == ""){
-		$("#text-vanity").addClass('error');
-		$("#alert-message").text("No text, no vanity address!");
-		$("#alert-message").show();
-		return false;
-	}else{
-		$("#text-vanity").removeClass('error');
-		$("#alert-message").hide();
-		return true;
-	}
-}
-
 function createWallet(){
 	var textVanity = $("#text-vanity").val();
 	var coresAllowed = $("#core-slider").val();
@@ -135,7 +122,7 @@ function createWallet(){
 	$("#vanity-form .options").fadeOut();
 
 	// validate input text
-	if(validateTextVanity(textVanity)){
+	if(textVanity != ""){
 		
 		// change buttons
 		$('#text-vanity').prop('disabled', true);
