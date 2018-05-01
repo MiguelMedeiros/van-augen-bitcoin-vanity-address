@@ -300,42 +300,7 @@ $( document ).ready(function() {
 		hideTooltip();
 	});
 
-	$.get("/coreNumbers", function(data){
-		var slider = document.getElementById("core-slider");
-		var output = document.getElementById("core-number");
-		output.innerHTML = 1; // Display the default slider value		
-		$("#core-slider").attr('max', data.length);
-		// Update the current slider value (each time you drag the slider handle)
-		slider.oninput = function() {
-			percentage = this.value*100/data.length;
-		    output.innerHTML = this.value;
-		    if(percentage <= 25){
-		    	$(".eye").addClass("eye25Percentage");
-		    	$(".eye").removeClass("eye50Percentage");
-		    	$(".eye").removeClass("eye75Percentage");
-		    	$(".eye").removeClass("eye1000Percentage");
-		    	console.log("menor ou igual a 25%");
-		    }else if(percentage <= 50){
-		    	$(".eye").addClass("eye50Percentage");
-		    	$(".eye").removeClass("eye25Percentage");
-		    	$(".eye").removeClass("eye75Percentage");
-		    	$(".eye").removeClass("eye1000Percentage");
-		    	console.log("menor ou igual a 50%");
-		    }else if(percentage <= 75){
-		    	$(".eye").addClass("eye75Percentage");
-		    	$(".eye").removeClass("eye25Percentage");
-		    	$(".eye").removeClass("eye50Percentage");
-		    	$(".eye").removeClass("eye100Percentage");
-		    	console.log("menor ou igual a 75%");
-		    }else if(percentage <= 100){
-		    	$(".eye").addClass("eye100Percentage");
-		    	$(".eye").removeClass("eye25Percentage");
-		    	$(".eye").removeClass("eye50Percentage");
-		    	$(".eye").removeClass("eye75Percentage");
-				console.log("menor ou igual a 100%");
-		    }
-		}
-	});
+	defineCoreRange();
 
 	// mask
 	$('#text-vanity').mask('AAAAAAA');
@@ -371,6 +336,54 @@ $( document ).ready(function() {
 	});
 	
 });
+
+function defineCoreRange(){
+	//reset colors
+	$.get("/coreNumbers", function(data){
+		var slider = document.getElementById("core-slider");
+		var output = document.getElementById("core-number");
+		output.innerHTML = $("#core-slider").val(); // Display the default slider value		
+		$("#core-slider").attr('max', data.length);
+		// Update the current slider value (each time you drag the slider handle)
+		slider.oninput = function() {
+		    output.innerHTML = this.value;
+			percentage = this.value*100/data.length;
+		    defineEyeColor(percentage);
+		}
+		var coresNumber = data.length;
+	});
+}
+
+function refreshEyeColor(){
+	$.get("/coreNumbers", function(data){
+		var slider = document.getElementById("core-slider");
+		var output = document.getElementById("core-number");
+		output.innerHTML = $("#core-slider").val(); // Display the default slider value		
+		$("#core-slider").attr('max', data.length);
+		// Update the current slider value (each time you drag the slider handle)
+		percentage = slider.value*100/data.length;
+		defineEyeColor(percentage);
+	});
+}
+
+function defineEyeColor(percentage){
+	resetEyeColor();
+	if(percentage <= 25){
+    	$(".eye").addClass("eye25Percentage");
+    }else if(percentage <= 50){
+    	$(".eye").addClass("eye50Percentage");
+    }else if(percentage <= 75){
+    	$(".eye").addClass("eye75Percentage");
+    }else if(percentage <= 100){
+    	$(".eye").addClass("eye100Percentage");
+    }
+}
+function resetEyeColor(){	
+	$(".eye").removeClass("eye25Percentage");
+	$(".eye").removeClass("eye50Percentage");
+	$(".eye").removeClass("eye75Percentage");
+	$(".eye").removeClass("eye100Percentage");
+}
 
 function resetCounter(){	
 	$('.counter-clock').counter("reset");
@@ -433,6 +446,7 @@ function createWallet(){
 	$(".attempts").hide();
 	$(".address").hide();
 	$("#vanity-form .options").fadeOut();
+	refreshEyeColor();
 
 	// validate input text
 	if(textVanity != ""){
@@ -495,6 +509,7 @@ function createWallet(){
 				$("main").addClass("no-margin");
 				$('.eye').removeClass('readEye');
 				$("body").addClass("stop-animation");
+				resetEyeColor();
 				stopCounter();
 			}
 		});
@@ -519,6 +534,7 @@ function cancelWallet(){
 		// stop animations
 		$('.eye').removeClass('readEye');
 		$("body").addClass("stop-animation");
+		resetEyeColor();
 	});
 }
 
@@ -532,4 +548,5 @@ function newSearch(){
 		//show options
 		$("#vanity-form .options").fadeIn(200);
 		$(".result-container").fadeOut(200);
+		refreshEyeColor();
 }
