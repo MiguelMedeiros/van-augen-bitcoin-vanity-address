@@ -20,7 +20,7 @@
     background: #9b88c0;
     transform: rotate(-65deg);
     position: relative;
-    transition: all 2000ms;
+    transition: all 700ms;
     top: 21px;
     left: 1px;
     &::before {
@@ -29,7 +29,8 @@
         width: 20px;
         height: 20px;
         border-radius: 50%;
-        background: #603a91;
+        //background: #603a91;
+        background: #000;
         position: absolute;
         top: 0;
         right: 0;
@@ -53,3 +54,19 @@
     top: 26px;
     animation: readEye 1s linear infinite;
 }
+
+.eye25Percentage{
+    background: #9b88c0;
+}
+.eye50Percentage{
+    background: #FFC900;
+}
+
+.eye75Percentage{
+    background: #FF8100;
+}
+
+.eye100Percentage{
+    background: #FF1300;
+}
+

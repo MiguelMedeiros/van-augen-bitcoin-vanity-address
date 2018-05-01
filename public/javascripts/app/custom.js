@@ -20,7 +20,33 @@ $( document ).ready(function() {
 		$("#core-slider").attr('max', data.length);
 		// Update the current slider value (each time you drag the slider handle)
 		slider.oninput = function() {
+			percentage = this.value*100/data.length;
 		    output.innerHTML = this.value;
+		    if(percentage <= 25){
+		    	$(".eye").addClass("eye25Percentage");
+		    	$(".eye").removeClass("eye50Percentage");
+		    	$(".eye").removeClass("eye75Percentage");
+		    	$(".eye").removeClass("eye1000Percentage");
+		    	console.log("menor ou igual a 25%");
+		    }else if(percentage <= 50){
+		    	$(".eye").addClass("eye50Percentage");
+		    	$(".eye").removeClass("eye25Percentage");
+		    	$(".eye").removeClass("eye75Percentage");
+		    	$(".eye").removeClass("eye1000Percentage");
+		    	console.log("menor ou igual a 50%");
+		    }else if(percentage <= 75){
+		    	$(".eye").addClass("eye75Percentage");
+		    	$(".eye").removeClass("eye25Percentage");
+		    	$(".eye").removeClass("eye50Percentage");
+		    	$(".eye").removeClass("eye100Percentage");
+		    	console.log("menor ou igual a 75%");
+		    }else if(percentage <= 100){
+		    	$(".eye").addClass("eye100Percentage");
+		    	$(".eye").removeClass("eye25Percentage");
+		    	$(".eye").removeClass("eye50Percentage");
+		    	$(".eye").removeClass("eye75Percentage");
+				console.log("menor ou igual a 100%");
+		    }
 		}
 	});
 
