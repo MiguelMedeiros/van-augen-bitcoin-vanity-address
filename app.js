@@ -48,23 +48,3 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
-
-
-// *********************************
-// Bitcoin Vanity Adresses
-// *********************************
-var cron = require('node-cron');
-var vanity = require('./components/vanity');
-
-
-//vanity.generateVanityWallet('sex');
-
-// Ideias
-
-// Leet mode
-// case sensitive
-// QrCode
-// Tempo estimado
-// Quantidade de endereços gerados
-// Segwit
-// Força da chave vanity (figurinhas)
