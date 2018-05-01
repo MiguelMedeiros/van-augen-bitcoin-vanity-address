@@ -343,7 +343,25 @@ $( document ).ready(function() {
 			$("main").removeClass("no-margin");
 		}
 	});
+	
 });
+
+function resetCounter(){	
+	$('.counter-clock').counter("reset");
+}
+
+function startCounter(){
+	$('.counter-clock').counter({
+		initial: "00:00:00",
+	    direction: 'up',
+	    format: "23:59:59",
+	    interval: 1000
+	});
+}
+
+function stopCounter(){
+	$('.counter-clock').counter("stop");
+}
 
 function hideTooltip() {
 	setTimeout(function() {
@@ -371,16 +389,37 @@ function createWallet(){
 	var stringLocation = $("#string-location").val();
 	var walletType = $("#wallet-type").val();
 
-	// start clock counter
-	$('.counter-clock').counter({
-		initial: "00:00:00",
-        direction: 'up',
-        format: "23:59:59",
-        interval: 1000
-	});
-	$(".result-container").hide();
-
 	$("body").removeClass("stop-animation");
+
+	// start clock counter
+	startCounter();
+
+	// show result
+	$(".result-container").fadeIn();
+
+	if(walletType == 'legacy'){
+		$(".result-container .wallet-type span").text('Legacy');
+	}else{
+		$(".result-container .wallet-type span").text('Segwit');
+	}
+
+	if(stringLocation == 'start'){
+		$(".result-container .string-location span").text('Start with text');
+	}else{
+		$(".result-container .string-location span").text('End with text');
+	}
+
+	if(caseSensitive == '0'){
+		$(".result-container .case-sensitive span").text('No');
+	}else{
+		$(".result-container .case-sensitive span").text('Yes');
+	}
+
+	$(".result-container .core-number span").text(coresAllowed);
+
+	$(".attempts").hide();
+	$(".address").hide();
+	$("#vanity-form .options").fadeOut();
 
 	// validate input text
 	if(validateTextVanity(textVanity)){
@@ -433,44 +472,19 @@ function createWallet(){
 					correctLevel : QRCode.CorrectLevel.H
 				});
 
-				// show result
-				$(".result-container").fadeIn();
-
-				if(walletType == 'legacy'){
-					$(".result-container .wallet-type span").text('Legacy');
-				}else{
-					$(".result-container .wallet-type span").text('Segwit');
-				}
-
-				if(stringLocation == 'start'){
-					$(".result-container .string-location span").text('Start with text');
-				}else{
-					$(".result-container .string-location span").text('End with text');
-				}
-
-				if(caseSensitive == '0'){
-					$(".result-container .case-sensitive span").text('No');
-				}else{
-					$(".result-container .case-sensitive span").text('Yes');
-				}
-
-				$(".result-container .core-number span").text(coresAllowed);
-
-
-				// change buttons and options
-				$('.eye').removeClass('readEye');
-				$('#text-vanity').prop('disabled', false);
-				$('select').prop('disabled', false);
-				$('input[type="range"]').prop('disabled', false);
-				$('.cancel-address').fadeOut(200);
-				$('.create-address').fadeOut(200);
+				// change buttons and options				
+				$('.cancel-address').hide();
+				$('.create-address').hide();
+				$(".attempts").hide();
+				$('.new-search').css('display', 'block');
 				$(".options").fadeOut(200);
-				$(".create-address").fadeOut(200);			
-				$("main").addClass("no-margin");
+				$(".address").fadeIn(200);				
 
 				// stop animation on background
+				$("main").addClass("no-margin");
+				$('.eye').removeClass('readEye');
 				$("body").addClass("stop-animation");
-				$('.counter-clock').counter("stop");
+				stopCounter();
 			}
 		});
 	}
@@ -478,18 +492,33 @@ function createWallet(){
 
 function cancelWallet(){
 	$.get("/cancelWallet", function(data){
-		
+		resetCounter();
+		stopCounter();
+
 		// change buttons
 		$('#text-vanity').prop('disabled', false);
-		$('select').prop('disabled', false);
-		$('input[type="range"]').prop('disabled', false);
-		$('.create-address').show(200);
-		$('.cancel-address').fadeOut(200);
+		$('.create-address').show();
+		$('.cancel-address').hide();
+		$('.new-search').hide();
 
+		//show options
+		$("#vanity-form .options").fadeIn(200);
+		$(".result-container").fadeOut(200);
+		
 		// stop animations
 		$('.eye').removeClass('readEye');
 		$("body").addClass("stop-animation");
 	});
 }
 
+function newSearch(){
+		// change buttons
+		$('#text-vanity').prop('disabled', false);
+		$('.create-address').show();
+		$('.cancel-address').hide();
+		$('.new-search').hide();
 
+		//show options
+		$("#vanity-form .options").fadeIn(200);
+		$(".result-container").fadeOut(200);
+}

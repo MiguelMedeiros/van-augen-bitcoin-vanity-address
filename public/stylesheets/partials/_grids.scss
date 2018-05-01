@@ -38,7 +38,7 @@
 	}
 }
 
-.create-address{
+.create-address, .new-search{
 	background: #FFA900;
 	//color: #000;
 	&:hover, &:focus{
@@ -124,6 +124,16 @@
 	span{
 		display: inline-block;
 		float: right;
+	}
+	.fas{
+		width: 18px;
+	}
+	.counter-clock{
+		display: inline-block;
+		float: right;
+		span{
+			float: left;
+		}
 	}
 }
 select{
