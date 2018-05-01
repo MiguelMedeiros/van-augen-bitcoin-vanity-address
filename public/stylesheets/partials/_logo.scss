@@ -53,26 +53,3 @@
     top: 26px;
     animation: readEye 1s linear infinite;
 }
-
-@keyframes readEye{
-    0%{
-        top: 26px;
-        left: 1px;
-    }
-    10%{
-        top: 26px;
-        left: 6px;
-    }
-    16%{
-        top: 26px;
-        left: 1px;
-    }
-    90%{
-        top: 26px;
-        left: -5px;
-    }
-    100%{
-        top: 26px;
-        left: 1px;
-    }
-}

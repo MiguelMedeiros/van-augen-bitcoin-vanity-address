@@ -11,15 +11,26 @@
 		border-radius: 0;
     }
 }
-@keyframes olhar {
-    0% {
-		left: 48%;
+@keyframes readEye{
+    0%{
+        top: 26px;
+        left: 1px;
     }
-    50%{
-    	left: 55%;
+    10%{
+        top: 26px;
+        left: 6px;
     }
-    100% {
-		left: 40%;
+    16%{
+        top: 26px;
+        left: 1px;
+    }
+    90%{
+        top: 26px;
+        left: -5px;
+    }
+    100%{
+        top: 26px;
+        left: 1px;
     }
 }
 
