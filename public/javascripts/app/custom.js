@@ -139,8 +139,6 @@ function createWallet(){
 		
 		// change buttons
 		$('#text-vanity').prop('disabled', true);
-		$('select').prop('disabled', true);
-		$('input[type="range"]').prop('disabled', true);
 		$('.cancel-address').css("display", "block");
 		$('.cancel-address').show();
 		$('.create-address').hide();
