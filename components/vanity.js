@@ -10,6 +10,7 @@ function SHA256(data) {
 
 function checkMatch(address, start, caseSensitive, query, upperCaseQuery) {
 	var startAddress;
+	var found = false;
 	if (!start) {
 		startAddress = address.substr(address.length-query.length, query.length);
 	} else {
@@ -93,7 +94,6 @@ var generateVanityWalletCustom = function(options, progress) {
 	var upperCaseQuery = options.query.toUpperCase();
 	while(1) {
 		i++;
-		var found = false;
 		result = getBitcoinWallet();
 		var found = checkMatch(result[0], start, caseSensitive, options.query, upperCaseQuery);
 
@@ -119,7 +119,6 @@ var generateVanityWalletBitcoinJS = function(options, progress) {
 		var keyPair = bitcoin.ECPair.makeRandom();
 		var address;
 		var startAddress;
-		var found = false;
 		var redeemScript = bitcoin.script.witnessPubKeyHash.output.encode(bitcoin.crypto.hash160(keyPair.getPublicKeyBuffer()));
 		var scriptPubKey = bitcoin.script.scriptHash.output.encode(bitcoin.crypto.hash160(redeemScript));
 		address = bitcoin.address.fromOutputScript(scriptPubKey);
