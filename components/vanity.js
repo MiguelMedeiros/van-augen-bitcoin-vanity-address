@@ -1,8 +1,9 @@
 var bitcoin = require('bitcoinjs-lib');
 var bs58 = require('bs58');
 var ec = require('eccrypto');
-var randomBytes = require('randombytes')
-var crypto = require('crypto')
+var randomBytes = require('randombytes');
+var crypto = require('crypto');
+var beeper = require('beeper');
 
 function SHA256(data) {
 	return crypto.createHash('sha256').update(data, 'utf8').digest();
@@ -98,6 +99,7 @@ var generateVanityWalletCustom = function(options, progress) {
 		var found = checkMatch(result[0], start, caseSensitive, options.query, upperCaseQuery);
 
 		if(found) {
+			beeper();
 			console.log("Number of created addresses to find your vanity address: "+i);
 			return ([result[0], generateWIF(result[1]), i]);
 		}
@@ -125,6 +127,7 @@ var generateVanityWalletBitcoinJS = function(options, progress) {
 
 		var found = checkMatch(address, start, caseSensitive, options.query, upperCaseQuery);
 		if(found) {
+			beeper();
 			console.log("Number of created addresses to find your vanity address: "+i);
 			return ([address, keyPair.toWIF(), i]);
 		}
