@@ -155,10 +155,10 @@ function createWallet(){
 					$(".result-container .string-location span").text('End with text');
 				}
 
-				if(caseSensitive == '1'){
-					$(".result-container .case-sensitive span").text('false');
+				if(caseSensitive == '0'){
+					$(".result-container .case-sensitive span").text('No');
 				}else{
-					$(".result-container .case-sensitive span").text('true');
+					$(".result-container .case-sensitive span").text('Yes');
 				}
 
 				// change buttons and options
