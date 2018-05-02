@@ -32,6 +32,12 @@ router.post('/generateWallet', function(req, res, next) {
 
 	console.log("Searching for Vanity Address!");
 
+	// invalidate any old request
+	if (oldResponse) {
+		console.log('cancel old thread')
+		oldResponse.send(false)
+	}
+
 	// prevent your request to fail
 	req.setTimeout(0);
 	
