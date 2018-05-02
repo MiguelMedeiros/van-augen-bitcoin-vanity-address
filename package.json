@@ -11,7 +11,6 @@
     "body-parser": "~1.18.2",
     "bootstrap": "^4.1.0",
     "cookie-parser": "~1.4.3",
-    "cryptojs": "^2.5.3",
     "debug": "~2.6.9",
     "eccrypto": "^1.0.3",
     "ejs": "~2.5.7",
