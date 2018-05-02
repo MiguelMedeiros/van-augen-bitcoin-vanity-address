@@ -313,25 +313,31 @@ $( document ).ready(function() {
 
 	// show options on focus
 	$("#text-vanity").click(function(){
-		if(this.value != ""){
-			$(".options").fadeIn(200);
-			$(".create-address").fadeIn(200);			
-			$("main").addClass("no-margin");
-		}else{
-			$(".options").fadeOut(200);
-			$(".create-address").fadeOut(200);			
-			$("main").removeClass("no-margin");
+		var inputDisabled = $('#text-vanity').prop('disabled');
+		if(inputDisabled == false){
+			if(this.value != ""){
+				$(".options").fadeIn(200);
+				$(".create-address").fadeIn(200);			
+				$("main").addClass("no-margin");
+			}else{
+				$(".options").fadeOut(200);
+				$(".create-address").fadeOut(200);			
+				$("main").removeClass("no-margin");
+			}
 		}
 	});
 	$("#text-vanity").keyup(function(){
-		if(this.value != ""){
-			$(".options").fadeIn(200);
-			$(".create-address").fadeIn(200);			
-			$("main").addClass("no-margin");
-		}else{
-			$(".options").fadeOut(200);
-			$(".create-address").fadeOut(200);			
-			$("main").removeClass("no-margin");
+		var inputDisabled = $('#text-vanity').prop('disabled');
+		if(inputDisabled == false){
+			if(this.value != ""){
+				$(".options").fadeIn(200);
+				$(".create-address").fadeIn(200);			
+				$("main").addClass("no-margin");
+			}else{
+				$(".options").fadeOut(200);
+				$(".create-address").fadeOut(200);			
+				$("main").removeClass("no-margin");
+			}
 		}
 	});
 
