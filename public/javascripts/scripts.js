@@ -316,12 +316,12 @@ $( document ).ready(function() {
 		var inputDisabled = $('#text-vanity').prop('disabled');
 		if(inputDisabled == false){
 			if(this.value != ""){
-				$(".options").fadeIn(200);
-				$(".create-address").fadeIn(200);			
+				$(".options").show();
+				$(".create-address").show();			
 				$("main").addClass("no-margin");
 			}else{
-				$(".options").fadeOut(200);
-				$(".create-address").fadeOut(200);			
+				$(".options").hide();
+				$(".create-address").hide();			
 				$("main").removeClass("no-margin");
 			}
 		}
@@ -330,12 +330,12 @@ $( document ).ready(function() {
 		var inputDisabled = $('#text-vanity').prop('disabled');
 		if(inputDisabled == false){
 			if(this.value != ""){
-				$(".options").fadeIn(200);
-				$(".create-address").fadeIn(200);			
+				$(".options").show();
+				$(".create-address").show();			
 				$("main").addClass("no-margin");
 			}else{
-				$(".options").fadeOut(200);
-				$(".create-address").fadeOut(200);			
+				$(".options").hide();
+				$(".create-address").hide();			
 				$("main").removeClass("no-margin");
 			}
 		}
@@ -437,7 +437,7 @@ function createWallet(){
 	startCounter();
 
 	// show result
-	$(".result-container").fadeIn();
+	$(".result-container").show(100);
 
 	if(walletType == 'legacy'){
 		$(".result-container .wallet-type span").text('Legacy');
@@ -459,9 +459,9 @@ function createWallet(){
 
 	$(".result-container .core-number span").text(coresAllowed);
 
-	$(".attempts").hide();
-	$(".address").hide();
-	$("#vanity-form .options").fadeOut();
+	$(".attempts").hide(100);
+	$(".address").hide(100);
+	$("#vanity-form .options").hide(100);
 	refreshEyeColor();
 
 	// validate input text
@@ -470,8 +470,8 @@ function createWallet(){
 		// change buttons
 		$('#text-vanity').prop('disabled', true);
 		$('.cancel-address').css("display", "block");
-		$('.cancel-address').show();
-		$('.create-address').hide();
+		$('.cancel-address').show(100);
+		$('.create-address').hide(100);
 		$('.eye').addClass('readEye');
 
 		// ajax call
@@ -514,73 +514,74 @@ function createWallet(){
 				});
 
 				// change buttons and options				
-				$('.cancel-address').hide();
-				$('.create-address').hide();
-				$(".attempts").fadeIn(200);
+				$('.cancel-address').hide(100);
+				$('.create-address').hide(100);
+				$(".options").hide(100);
 				$('.new-search').css('display', 'block');
-				$(".options").fadeOut(200);
-				$(".address").fadeIn(200);				
+				$(".attempts").show(100);
+				$(".address").show(100);				
 
 				// stop animation on background
 				$("main").addClass("no-margin");
 				$('.eye').removeClass('readEye');
 				$("body").addClass("stop-animation");
-				resetEyeColor();
-				stopCounter();
+				
 			}else{
-				resetCounter();
-				stopCounter();
-
 				// change buttons
 				$('#text-vanity').prop('disabled', false);
-				$('.create-address').show();
-				$('.cancel-address').hide();
-				$('.new-search').hide();
+				$('.create-address').show(100);
+				$('.cancel-address').hide(100);
+				$('.new-search').hide(100);
 
-				//show options
-				$("#vanity-form .options").fadeIn(200);
-				$(".result-container").fadeOut(200);
+				// show options
+				$("#vanity-form .options").show(100);
+				$(".result-container").hide(100);
 				
 				// stop animations
 				$('.eye').removeClass('readEye');
 				$("body").addClass("stop-animation");
-				resetEyeColor();
 			}
+			// reset clock counter
+			resetEyeColor();
+			stopCounter();
 		});
 	}
 }
 
 function cancelWallet(){
 	$.get("/cancelWallet", function(data){
+		// reset clock counter
 		resetCounter();
 		stopCounter();
 
-		// change buttons
-		$('#text-vanity').prop('disabled', false);
-		$('.create-address').show();
-		$('.cancel-address').hide();
-		$('.new-search').hide();
+		// hide elements
+		$('.cancel-address').hide(100);
+		$('.new-search').hide(100);
+		$(".result-container").hide(100);
 
-		//show options
-		$("#vanity-form .options").fadeIn(200);
-		$(".result-container").fadeOut(200);
+		// show elements
+		$('.create-address').show(100);
+		$("#vanity-form .options").show(100);
 		
 		// stop animations
 		$('.eye').removeClass('readEye');
 		$("body").addClass("stop-animation");
+		
+		$('#text-vanity').prop('disabled', false);
 		resetEyeColor();
 	});
 }
 
 function newSearch(){
-		// change buttons
-		$('#text-vanity').prop('disabled', false);
-		$('.create-address').show();
-		$('.cancel-address').hide();
-		$('.new-search').hide();
+		// hide elements
+		$('.cancel-address').hide(100);
+		$('.new-search').hide(100);
+		$(".result-container").hide(100);
 
-		//show options
-		$("#vanity-form .options").fadeIn(200);
-		$(".result-container").fadeOut(200);
-		refreshEyeColor();
+		// show elements
+		$('.create-address').show(100);
+		$("#vanity-form .options").show(100);
+
+		$('#text-vanity').prop('disabled', false);
+		resetEyeColor();
 }
