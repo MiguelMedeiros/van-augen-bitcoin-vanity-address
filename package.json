@@ -1,9 +1,24 @@
 {
-  "name": "vanity",
+  "name": "Van Augen",
   "version": "1.0.0",
+  "url" : "https://van-augen.com/",
+  "repository": "github:MiguelMedeiros/van-augen-bitcoin-vanity-address",
+  "license" : "MIT",
+  "contributors" : [ 
+    {
+      "name" : "Miguel Medeiros",
+      "email" : "miguel@miguelmedeiros.com.br",
+      "url" : "http://www.miguelmedeiros.com.br/"
+    },
+    {
+      "name" : "Tiago Salem",
+      "email" : "tiagosh@gmail.com",
+      "url" : "http://www.tiagosalem.com.br/"
+    }
+  ],
   "private": true,
   "scripts": {
-    "start": "start http://localhost:3000 & node ./bin/www"
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "beeper": "^1.1.1",
