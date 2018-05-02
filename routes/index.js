@@ -3,6 +3,7 @@ var router = express.Router();
 const spawn = require('threads').spawn;
 const Pool = require('threads').Pool;
 var os = require('os');
+var colors = require('colors');
 
 // helper variables to keep current search state
 var oldResponse = null;
@@ -30,12 +31,12 @@ router.get('/coreNumbers', function(req, res, next) {
 
 router.post('/generateWallet', function(req, res, next) {
 
-	console.log("Searching for Vanity Address!");
+	console.log("Searching for Vanity Address!".green);
 
 	// invalidate any old request
-	if (oldResponse) {
-		console.log('cancel old thread')
-		oldResponse.send(false)
+	if (oldResponse != null) {
+		console.log('Cancel old thread!'.red);
+		oldResponse.send(false);
 	}
 
 	// prevent your request to fail
@@ -65,7 +66,8 @@ router.post('/generateWallet', function(req, res, next) {
 				response[2] = attempts + response[2];
 			}
 			if (oldResponse) {
-				oldResponse.send(response);
+				oldResponse = null;
+				res.send(response);
 			}
 			killPool();
 		}).on('progress', function(progress) {
@@ -73,13 +75,14 @@ router.post('/generateWallet', function(req, res, next) {
 		});
 	}
 	req.on('close', function (err){
-		console.log("Process closed!");
+		console.log("Process closed!".red);
 		killPool();
 	});
 });
 
 router.get('/cancelWallet', function(req, res, next) {
 	// stop current thread if any
+	console.log("Cancel Process!".red);
 	killPool();
 
 	// inform ui the old search was cancelled

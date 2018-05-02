@@ -10,6 +10,7 @@
     "bitcoinjs-lib": "^3.3.2",
     "body-parser": "~1.18.2",
     "bootstrap": "^4.1.0",
+    "colors": "^1.2.3",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "eccrypto": "^1.0.3",
