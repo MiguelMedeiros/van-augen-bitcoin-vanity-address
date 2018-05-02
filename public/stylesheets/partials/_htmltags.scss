@@ -3,15 +3,16 @@ body{
 	font-family: 'Roboto', sans-serif;
 	color: #fff;
 	height: 100%;
-	//background: linear-gradient(45deg, #1D566E, #21ABA5, #163A5F);
 	background: linear-gradient(45deg, #283149, #21ABA5, #163A5F);
 	background-size: 400% 200%;
 	animation: gradient 5s ease infinite;
+	min-width: 300px;
 }
 
 main{
 	margin-top: 28vh;
 	transition: 500ms all;
+	padding: 0 0.5rem;
 }
 main.no-margin{
 	margin-top: 0vh;
@@ -19,4 +20,11 @@ main.no-margin{
 
 h1{
 	font-size: 2.7rem;
+}
+h2{
+	font-size: 1.75rem;
+
+	@include media-breakpoint-up(md){
+		font-size: 2rem;		
+	}
 }

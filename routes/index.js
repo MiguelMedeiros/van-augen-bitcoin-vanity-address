@@ -60,7 +60,12 @@ router.post('/generateWallet', function(req, res, next) {
 		done(result);
 	});
 	for (var i=0; i < coresAllowed; i++) {
-		var task = pool.send({query: req.body.textVanity, caseSensitive: caseSensitive, stringLocation: stringLocation, walletType: walletType });
+		var task = pool.send({
+			query: req.body.textVanity, 
+			caseSensitive: caseSensitive, 
+			stringLocation: stringLocation, 
+			walletType: walletType });
+		
 		task.on('done', function(response) {
 			if (attempts > 1000) {
 				response[2] = attempts + response[2];

@@ -334,6 +334,16 @@ $( document ).ready(function() {
 			$("main").removeClass("no-margin");
 		}
 	});
+
+	qrcode
+	var qrcodePublic = new QRCode("qrcode" , {
+		text: "1FgmtaGshjkgV9oj8uLm6cjWS7jRxknw4J",
+		width: 128,
+		height: 128,
+		colorDark : "#000000",
+		colorLight : "transparent",
+		correctLevel : QRCode.CorrectLevel.H
+	});
 	
 });
 
@@ -500,7 +510,7 @@ function createWallet(){
 				// change buttons and options				
 				$('.cancel-address').hide();
 				$('.create-address').hide();
-				$(".attempts").hide();
+				$(".attempts").fadeIn(200);
 				$('.new-search').css('display', 'block');
 				$(".options").fadeOut(200);
 				$(".address").fadeIn(200);				

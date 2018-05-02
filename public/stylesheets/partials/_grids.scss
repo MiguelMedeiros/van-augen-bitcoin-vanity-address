@@ -105,7 +105,12 @@
 	padding: 1rem;
 	display: block;
 	margin: 2rem auto 0;
-	width: 430px;
+	width: 100%;
+	font-size: 0.75rem;
+	@include media-breakpoint-up(sm){
+		font-size: 1rem;
+		width: 430px;
+	}
 }
 .result-text{
 	display: block;
@@ -162,6 +167,67 @@ select{
 	word-wrap: break-word;
 }
 .public-key, .private-key{
-	@include make-col(6);
+	@include make-col(12);
+	@include media-breakpoint-up(sm){
+		@include make-col(6);
+	}
 	padding: 2rem;
+	.btn{
+		display: block;
+		margin: 1rem auto;
+	}
+}
+
+//menu
+.menu{
+	padding: 0px;
+	list-style: none;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	text-align: center;
+	@include media-breakpoint-up(sm){
+		text-align: right;
+		right: 1rem;
+	}
+	li{
+		display: inline-block;
+		margin: 1rem 0.75rem;
+		a{
+			font-weight: bold;
+			color: #fff;
+			outline: 0 !important;
+			&:hover, &:focus{
+				color: #FFC900;
+				font-weight: bold;
+				text-decoration: none;
+			}
+		}
+	}
+}
+.modal-dialog{
+	margin-top: 10vh;
+	@include media-breakpoint-up(sm){
+		margin-top: 25vh;
+	}
+}
+.modal-header{
+	border: 0;
+}
+.modal-footer{
+	border: 0;
+}
+.modal-body{
+	color: #000;
+	img{
+		display: block;
+		margin: auto;
+	}
+	a{
+		outline: 0 !important;
+		color: #000;
+		&:focus, &:hover{
+			outline: 0 !important;
+		}		
+	}
 }
