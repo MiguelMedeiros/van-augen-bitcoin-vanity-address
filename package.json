@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "start http://localhost:3000 & node ./bin/www"
   },
   "dependencies": {
     "beeper": "^1.1.1",
