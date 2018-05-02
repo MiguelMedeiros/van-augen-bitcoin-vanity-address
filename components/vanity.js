@@ -4,6 +4,7 @@ var ec = require('eccrypto');
 var randomBytes = require('randombytes');
 var crypto = require('crypto');
 var beeper = require('beeper');
+var colors = require('colors');
 
 function SHA256(data) {
 	return crypto.createHash('sha256').update(data, 'utf8').digest();
@@ -100,7 +101,8 @@ var generateVanityWalletCustom = function(options, progress) {
 
 		if(found) {
 			beeper();
-			console.log("Number of created addresses to find your vanity address: "+i);
+			textFound = "Number of created addresses to find your vanity address: "+i;
+			console.log(textFound.green);
 			return ([result[0], generateWIF(result[1]), i]);
 		}
 

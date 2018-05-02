@@ -511,6 +511,24 @@ function createWallet(){
 				$("body").addClass("stop-animation");
 				resetEyeColor();
 				stopCounter();
+			}else{
+				resetCounter();
+				stopCounter();
+
+				// change buttons
+				$('#text-vanity').prop('disabled', false);
+				$('.create-address').show();
+				$('.cancel-address').hide();
+				$('.new-search').hide();
+
+				//show options
+				$("#vanity-form .options").fadeIn(200);
+				$(".result-container").fadeOut(200);
+				
+				// stop animations
+				$('.eye').removeClass('readEye');
+				$("body").addClass("stop-animation");
+				resetEyeColor();
 			}
 		});
 	}
