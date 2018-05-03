@@ -8,7 +8,7 @@ Website: https://va-augen.io
 
 ## Donate to the project
 Donate Bitcoins: 
-1LUx9Hs1fikvmRpgfzddcyQX7SZbeEMVxR
+1AuGenzbWtrBH8ZUBMjHjXPUnvNsDnjqay
 
 
 ## Installation
