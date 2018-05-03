@@ -343,7 +343,7 @@ $( document ).ready(function() {
 
 	qrcode
 	var qrcodePublic = new QRCode("qrcode" , {
-		text: "1FgmtaGshjkgV9oj8uLm6cjWS7jRxknw4J",
+		text: "1LUx9Hs1fikvmRpgfzddcyQX7SZbeEMVxR",
 		width: 128,
 		height: 128,
 		colorDark : "#000000",
