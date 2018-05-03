@@ -1,14 +1,13 @@
 # Van AuGen - Generates your golden Bitcoin vanity address!
 Website: https://va-augen.io
 
-Creators: 
+## Creators: 
 - Miguel Medeiros - http://www.miguelmedeiros.com.br
 - Tiago Salem - http://www.tiagosalem.com.br
 
 
 ## Donate to the project
 Donate Bitcoins: 
-
 1LUx9Hs1fikvmRpgfzddcyQX7SZbeEMVxR
 
 
