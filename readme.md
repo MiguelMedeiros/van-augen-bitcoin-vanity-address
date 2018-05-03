@@ -1,12 +1,15 @@
 # Van AuGen - Generates your golden Bitcoin vanity address!
 Website: https://va-augen.io
+
 Creators: 
 - Miguel Medeiros - http://www.miguelmedeiros.com.br
 - Tiago Salem - http://www.tiagosalem.com.br
 
 
 ## Donate to the project
-Donate Bitcoins: 1LUx9Hs1fikvmRpgfzddcyQX7SZbeEMVxR
+Donate Bitcoins: 
+
+1LUx9Hs1fikvmRpgfzddcyQX7SZbeEMVxR
 
 
 ## Installation
@@ -14,6 +17,7 @@ Donate Bitcoins: 1LUx9Hs1fikvmRpgfzddcyQX7SZbeEMVxR
 ### Step 1: Install NodeJS
 The only pre-requisite to make Van AuGen work is to have NodeJS installed.
 Download the latest version from the official NodeJS website:
+
 [link para o site oficial do Node JS!](https://nodejs.org/en/)
 
 ### Step 2: Download Van AuGen
