@@ -341,7 +341,7 @@ $( document ).ready(function() {
 		}
 	});
 
-	qrcode
+	// qrcode
 	var qrcodePublic = new QRCode("qrcode" , {
 		text: "1AuGenzbWtrBH8ZUBMjHjXPUnvNsDnjqay",
 		width: 128,
