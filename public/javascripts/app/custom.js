@@ -97,7 +97,7 @@ function verifyExcludedChars(text){
 		messageError = messageError + "l is not a valid character!<br/>";
 	}
 	if(messageError != ""){
-		$("#message-error span").html("<h1><i class='fas fa-exclamation-triangle'></i></h1>"+messageError+"<p>For more information<br/><a href=''>click here</a></p");
+		$("#message-error span").html("<h1><i class='fas fa-exclamation-triangle'></i></h1>"+messageError+"<p>For more information<br/><a target='_blank' href='https://en.bitcoin.it/wiki/Base58Check_encoding#Base58_symbol_chart'>click here</a></p");
 		$("#message-error").fadeIn();
 	}else{
 		$("#message-error").hide();		
