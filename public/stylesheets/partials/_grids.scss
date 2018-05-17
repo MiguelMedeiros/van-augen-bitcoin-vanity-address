@@ -231,3 +231,46 @@ select{
 		}		
 	}
 }
+
+#difficulty-time{
+	display: none;
+	margin: 1rem auto;
+	span{
+
+	}
+}
+
+#message-error{
+	display: none;
+	margin: 1rem auto;
+	background-color: #b91a04;
+	max-width: 210px;
+	padding: 1rem 0 0.15rem;
+	border-radius: 5px;
+	box-shadow: 0 8px 28px rgba(0,0,0,0.15), 0 8px 10px rgba(0,0,0,0.12);
+
+	h1{
+		display: block;
+		width: 100%;
+		font-size: 18px;
+		font-weight: bold;
+		margin-bottom: 1rem;
+	}
+	span{
+		color: #fff;
+	}
+	a{
+		margin-top: 0.5rem;
+		display: block;
+		text-transform: uppercase;
+		color: #fff;
+		font-weight: bold;
+	}
+	p{
+		margin-top: 1rem;
+		font-weight: normal;
+	}
+	i{
+		margin: 0 0.5rem;
+	}
+}

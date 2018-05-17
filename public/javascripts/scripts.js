@@ -286,7 +286,7 @@ h("input"),watchDataMask:!1,byPassKeys:[9,16,17,18,36,37,38,39,40,91],translatio
 }));
 
 $( document ).ready(function() {
-	
+
 	// Copy to Clipboard
 	$('.clipboard').tooltip({
 		title: 'Copied!',
@@ -303,42 +303,22 @@ $( document ).ready(function() {
 	defineCoreRange();
 
 	// mask
-	$('#text-vanity').mask('AAAAAAA');
+	$('#text-vanity').mask('AAAAAAAAAA');
 
 	// vanity form submit
 	$( "#vanity-form" ).submit(function( event ) {
-		createWallet();
 		event.preventDefault();
+		if(validateInput()){
+			createWallet();
+		}
 	});
 
-	// show options on focus
+	// show options on focus or click
 	$("#text-vanity").click(function(){
-		var inputDisabled = $('#text-vanity').prop('disabled');
-		if(inputDisabled == false){
-			if(this.value != ""){
-				$(".options").show();
-				$(".create-address").show();			
-				$("main").addClass("no-margin");
-			}else{
-				$(".options").hide();
-				$(".create-address").hide();			
-				$("main").removeClass("no-margin");
-			}
-		}
+		validateInput();
 	});
 	$("#text-vanity").keyup(function(){
-		var inputDisabled = $('#text-vanity').prop('disabled');
-		if(inputDisabled == false){
-			if(this.value != ""){
-				$(".options").show();
-				$(".create-address").show();			
-				$("main").addClass("no-margin");
-			}else{
-				$(".options").hide();
-				$(".create-address").hide();			
-				$("main").removeClass("no-margin");
-			}
-		}
+		validateInput();		
 	});
 
 	// qrcode
@@ -352,6 +332,105 @@ $( document ).ready(function() {
 	});
 	
 });
+
+function validateInput(){
+	var inputDisabled = $("#text-vanity").prop('disabled');
+	var validInput = false;
+	var inputText = $("#text-vanity").val();
+	var inputLength = inputText.length;
+
+	calcDifficultTime(inputLength);
+	containExcludedChars = verifyExcludedChars(inputText);
+
+	if((inputDisabled == false) && containExcludedChars){
+		if(inputText != ""){
+			validInput = true;
+			$(".options").show();
+			$(".create-address").show();			
+			$("main").addClass("no-margin");
+		}else{
+			$(".options").hide();
+			$(".create-address").hide();			
+			$("main").removeClass("no-margin");
+			$("#difficulty-time").hide();
+		}
+	}else{
+		$(".options").hide();
+		$(".create-address").hide();			
+		$("main").removeClass("no-margin");
+		$("#difficulty-time").hide();
+	}
+	return validInput;
+}
+
+function verifyExcludedChars(text){
+	// verify excluded chars from base 58
+	containExcludedChars = false;
+	messageError = "";
+	if(text.includes("0")){
+		containExcludedChars = true;
+		messageError = "0 is not a valid character!<br/>";
+	}
+	if(text.includes("O")){
+		containExcludedChars = true;
+		messageError = messageError + "O is not a valid character!<br/>";
+	}
+	if(text.includes("I")){
+		containExcludedChars = true;
+		messageError = messageError + "I is not a valid character!<br/>";
+	}
+	if(text.includes("l")){
+		containExcludedChars = true;
+		messageError = messageError + "l is not a valid character!<br/>";
+	}
+	if(messageError != ""){
+		$("#message-error span").html("<h1><i class='fas fa-exclamation-triangle'></i></h1>"+messageError+"<p>For more information<br/><a href=''>click here</a></p");
+		$("#message-error").fadeIn();
+	}else{
+		$("#message-error").hide();		
+	}
+	return !containExcludedChars;
+}
+
+function calcDifficultTime(inputLength){
+	if(inputLength == 0){
+		$("#difficulty-time").hide();
+	}else{
+		$("#difficulty-time").show();
+	}
+	switch(inputLength){
+		case 1:
+			$("#difficulty-time span").html("<b>1 second</b>");
+			break;
+		case 2:
+			$("#difficulty-time span").html("<b>1 second</b>");
+			break;
+		case 3:
+			$("#difficulty-time span").html("<b>10 seconds</b>");
+			break;
+		case 4:
+			$("#difficulty-time span").html("<b>1 hour</b>");
+			break;
+		case 5:
+			$("#difficulty-time span").html("<b>3 hours</b>");
+			break;
+		case 6:
+			$("#difficulty-time span").html("<b>10 hours</b>");
+			break;
+		case 7:
+			$("#difficulty-time span").html("<b>1 week</b>");
+			break;
+		case 8:
+			$("#difficulty-time span").html("<b>1 year</b>");
+			break;
+		case 9:
+			$("#difficulty-time span").html("<b>Good luck!</b>");
+			break;
+		case 10:
+			$("#difficulty-time span").html("<b>Eternity!</b>");
+			break;
+	}
+}
 
 function defineCoreRange(){
 	//reset colors
