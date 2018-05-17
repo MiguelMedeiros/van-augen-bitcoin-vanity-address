@@ -17,7 +17,7 @@ Donate Bitcoins:
 The only pre-requisite to make Van AuGen work is to have NodeJS installed.
 Download the latest version from the official NodeJS website:
 
-[link para o site oficial do Node JS!](https://nodejs.org/en/)
+[Link to Node JS official website!](https://nodejs.org/en/)
 
 ### Step 2: Download Van AuGen
 You may clone the project from the github repository:
