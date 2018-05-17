@@ -19,7 +19,7 @@
 		}
 	}
 }
-.button{
+.button, .btn-print{
 	display: none;
 	margin: 1rem auto;
 	background: #fff;
@@ -34,6 +34,24 @@
 	&:hover, &:focus{
 		text-decoration: none;
 		color: #fff;
+		box-shadow: 0 2px 22px rgba(0,0,0,0.25), 0 2px 4px rgba(0,0,0,0.22);
+	}
+}
+.btn-print{
+	display: inline-block;
+	margin: 1rem auto;
+	background: #ddd;
+	width: 200px;
+	padding: 1rem;
+	border-radius: 5px;
+	border: 0;
+	color: #000;
+	cursor: pointer;
+	box-shadow: 0 8px 28px rgba(0,0,0,0.15), 0 8px 10px rgba(0,0,0,0.12);
+	transition: all 300ms;
+	&:hover, &:focus{
+		text-decoration: none;
+		color: #000;
 		box-shadow: 0 2px 22px rgba(0,0,0,0.25), 0 2px 4px rgba(0,0,0,0.22);
 	}
 }
